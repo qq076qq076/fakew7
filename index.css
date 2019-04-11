@@ -34,8 +34,23 @@ body {
   border-radius: 50%;
 }
 .container .toolbar .tool-list {
+  display: flex;
+  flex-direction: row;
   flex: 1;
+  padding: 0 4px;
   background: linear-gradient(to right, rgba(45, 37, 37, 0.3), rgba(0, 0, 0, 0) 2%, rgba(0, 0, 0, 0) 98%, rgba(45, 37, 37, 0.3));
+}
+.container .toolbar .tool-list .icon {
+  margin: 0 1px;
+  width: 58px;
+  border: 1px solid #434D58;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+.container .toolbar .tool-list .icon img {
+  height: 78%;
 }
 .container .toolbar .small-icon {
   width: 253px;
