@@ -48,11 +48,12 @@ h5 {
             background: url(./images/start-icon.png) center no-repeat;
             background-position-y: -9px;
             border-radius: 50%;
-            &:hover{
+
+            &:hover {
                 background-position-y: -63px;
             }
 
-            &:active{
+            &:active {
                 background-position-y: -117px;
             }
         }
@@ -79,6 +80,7 @@ h5 {
 
             img {
                 height: 78%;
+                z-index: 5;
             }
 
             &::before {
@@ -101,10 +103,23 @@ h5 {
                 border: 1px solid rgba(0, 0, 0, 0);
             }
 
-            &:hover,
-            &.active {
-                border: 1px solid rgba(67, 77, 88, 0.8);
+            //沒有其餘狀態
+            &:hover {
+                border: 1px solid transparent;
+                border-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(45, 37, 37, 0.3) 25%, rgba(45, 37, 37, 0.3) 75%, rgba(255, 255, 255, 0));
+                border-image-slice: 1;
+            }
 
+            &:active {
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(45, 37, 37, 0.4) 50%, rgba(255, 255, 255, 0));
+            }
+
+            &:focus {
+                outline: none;
+            }
+
+            //已開啟的狀態
+            &.open {
                 &::before {
                     background: linear-gradient(163deg, rgba(255, 255, 255, 0.9), rgba(0, 0, 0, 0) 45%);
                 }
@@ -112,7 +127,13 @@ h5 {
                 &::after {
                     border: 1px solid rgba(230, 239, 249, 0.5);
                 }
+
+                &:hover::before,
+                &.focus {
+                    background:rgba(255, 255, 255, 0.9);
+                }
             }
+
         }
     }
 
@@ -128,8 +149,9 @@ h5 {
         width: 78px;
         color: white;
         background: rgba(45, 37, 37, 0.3);
-        >p{
-            display:flex;
+
+        >p {
+            display: flex;
             align-items: center;
             justify-content: center;
             height: 50%;
