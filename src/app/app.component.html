@@ -1,4 +1,13 @@
+<div class="start-anim" *ngIf="starting">
+  <div class="gif">
+    <img src="assets/images/start.gif" />
+    <h3>正在啟動 Windows</h3>
+  </div>
+  <p class="copyright">© Microsoft Corporation</p>
+</div>
 <div class="container">
-  <div class="desktop"></div>
+  <div class="desktop">
+    <app-windows ngDraggable></app-windows>
+  </div>
   <app-toolbar></app-toolbar>
 </div>

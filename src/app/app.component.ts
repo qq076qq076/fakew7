@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'start';
+  starting = true;
+
+  constructor() {
+    setTimeout(() => {
+      this.starting = false;
+    }, 4800);
+  }
 }
