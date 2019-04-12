@@ -19,7 +19,8 @@
             background-position-y: -9px;
             border-radius: 50%;
 
-            &:hover {
+            &:hover,
+            &.open {
                 background-position-y: -63px;
             }
 

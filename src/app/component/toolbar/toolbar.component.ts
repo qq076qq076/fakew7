@@ -4,11 +4,12 @@ import { ApplicationService, IApplication } from 'src/app/service/application/ap
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+  styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements OnInit {
 
   appList: IApplication[] = [];
+  openPrograms = false;
 
   constructor(
     private appService: ApplicationService
@@ -24,6 +25,11 @@ export class ToolbarComponent implements OnInit {
   toggleApp(app: IApplication) {
     console.log(app)
     this.appService.clickApp(app);
+  }
+
+  toggleProgrames() {
+    this.openPrograms = !this.openPrograms;
+    console.log(this.openPrograms)
   }
 
 }

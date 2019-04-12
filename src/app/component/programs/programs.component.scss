@@ -1,6 +1,6 @@
 :host {
     position: absolute;
-    display: flex;
+    display: none;
     width: 413px;
     height: 578px;
     border-radius: 6px;
@@ -14,6 +14,10 @@
         rgba(212, 143, 143, 0.6) 20%,
         rgba(45, 37, 37, 0.6) 40%,
         rgb(165, 190, 219));
+
+    &.open{
+        display: flex;
+    }
 
     .programs-list {
         width: 251px;
