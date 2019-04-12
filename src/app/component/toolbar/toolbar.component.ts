@@ -22,7 +22,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   toggleApp(app: IApplication) {
-
+    console.log(app)
+    this.appService.clickApp(app);
   }
 
 }

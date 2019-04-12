@@ -20,17 +20,17 @@ export class ApplicationService {
       isOpen: false,
     },
     {
-      name: 'ie',
+      name: 'player',
       img: '/assets/images/player-icon.png',
       isOpen: false,
     },
     {
-      name: 'ie',
+      name: 'chrome',
       img: '/assets/images/chrome-icon.png',
       isOpen: false,
     },
     {
-      name: 'ie',
+      name: 'line',
       img: '/assets/images/line-icon.png',
       isOpen: false,
     },
@@ -42,4 +42,11 @@ export class ApplicationService {
   getApplication(): Observable<IApplication[]> {
     return this.applicationSubject;
   }
+
+  clickApp(app: IApplication) {
+    const index = this.applicationList.findIndex((appIteem: IApplication) => appIteem.name === app.name);
+    this.applicationList[index].isOpen = !this.applicationList[index].isOpen;
+    this.applicationSubject.next(this.applicationList);
+  }
+
 }

@@ -2,8 +2,8 @@
   <i></i>
 </div>
 <div class="tool-list">
-  <div class="icon" *ngFor="let item of appList" (click)="toggleApp(item)">
-      <img [src]="item.img" />
+  <div class="icon" *ngFor="let item of appList" (click)="toggleApp(item)" [ngClass]="{'open': item.isOpen}">
+    <img [src]="item.img" />
   </div>
 </div>
 <!-- <div class="small-icon">
