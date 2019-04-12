@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font-family: Microsoft JhengHei;
 }
 p,
 h1,
@@ -18,13 +19,16 @@ h5 {
   min-height: 768px;
   display: flex;
   flex-direction: column;
+  background: url(images/background.jpg) center center / cover no-repeat fixed;
+}
+.desktop {
+  flex: 1;
 }
 .toolbar {
   height: 40px;
-  background: linear-gradient(to top, rgba(51, 117, 191, 0.45) 95%, #CAD9EA);
+  background: linear-gradient(to top, rgba(51, 117, 191, 0.6) 95%, #CAD9EA);
   border-top: 1px solid #434D58;
   display: flex;
-  width: 1917px;
 }
 .toolbar .start {
   padding: 1px 9px;
