@@ -1,0 +1,25 @@
+:host {
+    position: absolute;
+    display: flex;
+    width: 413px;
+    height: 578px;
+    border-radius: 6px;
+    bottom: 42px;
+    left: 0;
+    padding: 7px;
+    box-sizing: border-box;
+    background:
+        linear-gradient(to bottom,
+        rgb(144, 162, 185) 0%,
+        rgba(212, 143, 143, 0.6) 20%,
+        rgba(45, 37, 37, 0.6) 40%,
+        rgb(165, 190, 219));
+
+    .programs-list {
+        width: 251px;
+        background: white;
+        border-radius: 3px;
+        border: 1px solid rgb(123, 134, 145);
+    }
+
+}

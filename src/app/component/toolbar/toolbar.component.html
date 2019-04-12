@@ -1,5 +1,6 @@
 <div class="start">
   <i></i>
+  <app-programs></app-programs>
 </div>
 <div class="tool-list">
   <div class="icon" *ngFor="let item of appList" (click)="toggleApp(item)" [ngClass]="{'open': item.isOpen}">
