@@ -1,6 +1,8 @@
-<div class="container">
-  <div class="title" #title>
-    <img [src]="logo">
-    {{name}}
+<div class="border-container" #border-container (mouseover)="changeCursor($event)">
+  <div class="container">
+    <div class="title" #title>
+      <img [src]="logo">
+      {{name}}
+    </div>
   </div>
 </div>
