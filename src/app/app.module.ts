@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularDraggableModule } from 'angular2-draggable';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './component/toolbar/toolbar.component';
@@ -15,8 +14,7 @@ import { WindowsComponent } from './component/windows/windows.component';
     WindowsComponent
   ],
   imports: [
-    BrowserModule,
-    AngularDraggableModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

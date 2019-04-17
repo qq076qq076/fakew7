@@ -1,8 +1,15 @@
-<div class="border-container" #border-container (mouseover)="changeCursor($event)">
-  <div class="container">
-    <div class="title" #title>
-      <img [src]="logo">
-      {{name}}
-    </div>
+<!-- <div class="border-container"
+     #borderContainer
+     (mouseover)="changeCursor($event)"
+     [ngStyle]="{'cursor':direction?.cursor}"> -->
+<div class="container"
+     (mouseover)="console('mouseover')"
+     (mouseenter)="console('mouseenter')"
+     >
+  <div class="title"
+       #title>
+    <img [src]="logo">
+    {{name}}
   </div>
 </div>
+<!-- </div> -->

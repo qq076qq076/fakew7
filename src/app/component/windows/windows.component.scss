@@ -5,29 +5,8 @@
     height: 300px;
     width: 300px;
     background: #d8e4f3;
-    padding: 1px 3px;
-
-    .border-container {
-        position: absolute;
-        padding: 5px;
-        box-sizing: border-box;
-
-        &.左上{
-            cursor: nw-resize;
-        }
-
-        &.右上{
-            cursor: ne-resize;
-        }
-
-        &.水平{
-            cursor: w-resize;
-        }
-
-        &.垂直{
-            cursor: s-resize;
-        }
-    }
+    padding: 15px;
+    position: absolute;
 
     .container {
         height: 100%;
