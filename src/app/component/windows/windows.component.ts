@@ -17,20 +17,20 @@ export class WindowsComponent {
 
   name = 'Windows Internet Explorer';
   logo = '/assets/images/ie-icon.png';
-  direction: DragDirection;
+  direction = DragDirection.Default;
   startX = 0;
   startY = 0;
   boundary = 15;
   elementNative: HTMLElement;
   myTop = 50;
   myLeft = 50;
-  myHeight: number = 300;
-  myWidth: number = 300;
+  myHeight = 300;
+  myWidth = 300;
   resizing = false;
 
   @HostBinding('style')
   get style() {
-    const cursor = this.direction ? this.direction.cursor : 'default';
+    const cursor = this.direction.cursor;
     const top = this.myTop ? this.myTop + 'px' : 'auto';
     const height = this.myHeight ? this.myHeight + 'px' : 'auto';
     const left = this.myLeft ? this.myLeft + 'px' : 'auto';
@@ -69,15 +69,14 @@ export class WindowsComponent {
 
   @HostListener('mousedown', ['$event']) resizeStart(e) {
     this.resizing = true;
-    this.startX = e.clientX - e.target.offsetLeft;
-    this.startY = e.clientY - e.target.offsetHeight;
-    console.log(e.target.offsetLeft)
+    console.log('mousedown')
+    console.log(e)
   }
 
   @HostListener('document:mousemove', ['$event']) resize(e: MouseEvent) {
     if (this.resizing) {
-      const x = e.clientX - this.startX;
-      const y = e.clientY - this.startY;
+      const x = e.movementX;
+      const y = e.movementY;
       const domWidth = this.elementRef.nativeElement.offsetWidth;
       const domHeight = this.elementRef.nativeElement.offsetHeight;
       const domTop = this.elementRef.nativeElement.offsetTop;
@@ -119,9 +118,6 @@ export class WindowsComponent {
           this.myHeight = domHeight + y;
           break;
       }
-      // 設定上一個滑鼠移動點
-      this.startX = e.clientX;
-      this.startY = e.clientY;
     }
   }
 
@@ -132,10 +128,10 @@ export class WindowsComponent {
   }
 
   preventDefault(e: MouseEvent) {
+    this.direction = DragDirection.Default;
     e.preventDefault();
     e.stopPropagation();
     console.log('preventDefault')
-    this.direction = DragDirection.Default;
   }
 
 }
