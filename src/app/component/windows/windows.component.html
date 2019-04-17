@@ -3,8 +3,8 @@
      (mouseover)="changeCursor($event)"
      [ngStyle]="{'cursor':direction?.cursor}"> -->
 <div class="container"
-     (mouseover)="console('mouseover')"
-     (mouseenter)="console('mouseenter')"
+     (mouseenter)="preventDefault($event)"
+     (mousedown)="preventDefault($event)"
      >
   <div class="title"
        #title>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, HostBinding } from '@angular/core';
+import { Component, ElementRef, HostListener, HostBinding, Input, ComponentFactoryResolver } from '@angular/core';
 import { DragDirection } from 'src/app/type/drag-direction/drag-direction';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -14,6 +14,7 @@ export class WindowsComponent {
   ) {
     this.elementNative = elementRef.nativeElement;
   }
+
   name = 'Windows Internet Explorer';
   logo = '/assets/images/ie-icon.png';
   direction: DragDirection;
@@ -21,68 +22,120 @@ export class WindowsComponent {
   startY = 0;
   boundary = 15;
   elementNative: HTMLElement;
+  myTop = 50;
+  myLeft = 50;
+  myHeight: number = 300;
+  myWidth: number = 300;
   resizing = false;
 
-  // @HostBinding('style')
-  // get cursor() {
-  //   const cursor = this.direction ? this.direction.cursor : 'default';
-  //   return this.sanitizer.bypassSecurityTrustStyle(`cursor: ${cursor};`);
-  // }
-  // @HostListener('mouseover', ['$event']) onmouseover(e: MouseEvent) {
-  //   console.log('mouseover')
-  //   const width = this.elementNative.offsetWidth;
-  //   const height = this.elementNative.offsetHeight;
-  //   const cursorX = Math.min(Math.max(e.offsetX, 0), width);
-  //   const cursorY = Math.min(Math.max(e.offsetY, 0), height);
-  //   if (this.resizing) {
-  //     return false;
-  //   }
-  //   if (cursorX < this.boundary) {
-  //     if (cursorY < this.boundary) {
-  //       this.direction = DragDirection.LeftTop;
-  //     } else if (height - cursorY < this.boundary) {
-  //       this.direction = DragDirection.LeftBottom;
-  //     } else {
-  //       this.direction = DragDirection.Left;
-  //     }
-  //   } else if (width - cursorX < this.boundary) {
-  //     if (cursorY < this.boundary) {
-  //       this.direction = DragDirection.RightTop;
-  //     } else if (height - cursorY < this.boundary) {
-  //       this.direction = DragDirection.RightBottom;
-  //     } else {
-  //       this.direction = DragDirection.Right;
-  //     }
-  //   } else {
-  //     this.direction = (cursorY < this.boundary) ? DragDirection.Top : DragDirection.Bottom;
-  //   }
-  // }
+  @HostBinding('style')
+  get style() {
+    const cursor = this.direction ? this.direction.cursor : 'default';
+    const top = this.myTop ? this.myTop + 'px' : 'auto';
+    const height = this.myHeight ? this.myHeight + 'px' : 'auto';
+    const left = this.myLeft ? this.myLeft + 'px' : 'auto';
+    const width = this.myWidth ? this.myWidth + 'px' : 'auto';
+    return this.sanitizer.bypassSecurityTrustStyle(`cursor: ${cursor};top: ${top}; height: ${height};left: ${left};width: ${width}`);
+  }
 
-  // @HostListener('mousedown', ['$event']) resizeStart(e) {
-  //   this.resizing = true;
-  //   this.startX = e.clientX - e.target.offsetLeft;
-  //   this.startY = e.clientY - e.target.offsetHeight;
-  //   console.log(this.startX)
-  // }
+  @HostListener('mousemove', ['$event']) onmouseover(e: MouseEvent) {
+    const width = this.elementNative.offsetWidth;
+    const height = this.elementNative.offsetHeight;
+    const cursorX = Math.min(Math.max(e.offsetX, 0), width);
+    const cursorY = Math.min(Math.max(e.offsetY, 0), height);
+    if (this.resizing) {
+      return false;
+    }
+    if (cursorX < this.boundary) {
+      if (cursorY < this.boundary) {
+        this.direction = DragDirection.LeftTop;
+      } else if (height - cursorY < this.boundary) {
+        this.direction = DragDirection.LeftBottom;
+      } else {
+        this.direction = DragDirection.Left;
+      }
+    } else if (width - cursorX < this.boundary) {
+      if (cursorY < this.boundary) {
+        this.direction = DragDirection.RightTop;
+      } else if (height - cursorY < this.boundary) {
+        this.direction = DragDirection.RightBottom;
+      } else {
+        this.direction = DragDirection.Right;
+      }
+    } else {
+      this.direction = (cursorY < this.boundary) ? DragDirection.Top : DragDirection.Bottom;
+    }
+  }
 
-  // @HostListener('document:mouseover') resize() {
+  @HostListener('mousedown', ['$event']) resizeStart(e) {
+    this.resizing = true;
+    this.startX = e.clientX - e.target.offsetLeft;
+    this.startY = e.clientY - e.target.offsetHeight;
+    console.log(e.target.offsetLeft)
+  }
 
-  // }
+  @HostListener('document:mousemove', ['$event']) resize(e: MouseEvent) {
+    if (this.resizing) {
+      const x = e.clientX - this.startX;
+      const y = e.clientY - this.startY;
+      const domWidth = this.elementRef.nativeElement.offsetWidth;
+      const domHeight = this.elementRef.nativeElement.offsetHeight;
+      const domTop = this.elementRef.nativeElement.offsetTop;
+      const domLeft = this.elementRef.nativeElement.offsetLeft;
+      // 移動量加上原本的寬度
+      switch (this.direction) {
+        case DragDirection.LeftTop:
+          this.myTop = domTop + y;
+          this.myHeight = domHeight - y;
+          this.myLeft = domLeft + x;
+          this.myWidth = domWidth - x;
+          break;
+        case DragDirection.LeftBottom:
+          this.myHeight = domHeight + y;
+          this.myLeft = domLeft + x;
+          this.myWidth = domWidth - x;
+          break;
+        case DragDirection.Left:
+          this.myLeft = domLeft + x;
+          this.myWidth = domWidth - x;
+          break;
+        case DragDirection.RightTop:
+          this.myTop = domTop + y;
+          this.myHeight = domHeight - y;
+          this.myWidth = domWidth + x;
+          break;
+        case DragDirection.RightBottom:
+          this.myWidth = domWidth + x;
+          this.myHeight = domHeight + y;
+          break;
+        case DragDirection.Right:
+          this.myWidth = domWidth + x;
+          break;
+        case DragDirection.Top:
+          this.myTop = domTop + y;
+          this.myHeight = domHeight - y;
+          break;
+        case DragDirection.Bottom:
+          this.myHeight = domHeight + y;
+          break;
+      }
+      // 設定上一個滑鼠移動點
+      this.startX = e.clientX;
+      this.startY = e.clientY;
+    }
+  }
 
-  // @HostListener('document:mouseup', ['$event']) resizeStop() {
-  //   this.startX = 0;
-  //   this.startY = 0;
-  //   this.resizing = false;
-  // }
+  @HostListener('document:mouseup', ['$event']) resizeStop() {
+    this.startX = 0;
+    this.startY = 0;
+    this.resizing = false;
+  }
 
-  // preventDefault(e: MouseEvent) {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   this.direction = undefined;
-  // }
-
-  console(event) {
-    console.log('event:' + event)
+  preventDefault(e: MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('preventDefault')
+    this.direction = DragDirection.Default;
   }
 
 }

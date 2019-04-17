@@ -1,4 +1,5 @@
 export class DragDirection {
+  public static Default = new DragDirection(0, 'default');
   public static LeftTop = new DragDirection(1, 'nw-resize');
   public static LeftBottom = new DragDirection(2, 'ne-resize');
   public static Left = new DragDirection(3, 'w-resize');
@@ -9,6 +10,7 @@ export class DragDirection {
   public static Bottom = new DragDirection(8, 's-resize');
 
   public static readonly List: DragDirection[] = [
+    DragDirection.Default,
     DragDirection.LeftTop,
     DragDirection.LeftBottom,
     DragDirection.Left,
