@@ -27,8 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/angular2-draggable/css/resizable.min.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
