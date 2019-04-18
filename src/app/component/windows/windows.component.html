@@ -3,9 +3,8 @@
      (mouseover)="changeCursor($event)"
      [ngStyle]="{'cursor':direction?.cursor}"> -->
 <div class="container"
-     (mouseenter)="preventDefault($event)"
-     (mousedown)="preventDefault($event)"
-     >
+     [ngClass]="{'resizing': resizing}"
+     (mousemove)="preventDefault($event)">
   <div class="title"
        #title>
     <img [src]="logo">

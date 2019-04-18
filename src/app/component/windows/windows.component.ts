@@ -12,25 +12,23 @@ export class WindowsComponent {
     private elementRef: ElementRef,
     private sanitizer: DomSanitizer,
   ) {
-    this.elementNative = elementRef.nativeElement;
   }
 
   name = 'Windows Internet Explorer';
   logo = '/assets/images/ie-icon.png';
-  direction: DragDirection;
-  startX = 0;
-  startY = 0;
+  direction = DragDirection.Default;
   boundary = 15;
-  elementNative: HTMLElement;
+  lastX = 0;
+  lastY = 0;
   myTop = 50;
   myLeft = 50;
-  myHeight: number = 300;
-  myWidth: number = 300;
+  myHeight = 300;
+  myWidth = 300;
   resizing = false;
 
   @HostBinding('style')
   get style() {
-    const cursor = this.direction ? this.direction.cursor : 'default';
+    const cursor = this.direction.cursor;
     const top = this.myTop ? this.myTop + 'px' : 'auto';
     const height = this.myHeight ? this.myHeight + 'px' : 'auto';
     const left = this.myLeft ? this.myLeft + 'px' : 'auto';
@@ -39,8 +37,8 @@ export class WindowsComponent {
   }
 
   @HostListener('mousemove', ['$event']) onmouseover(e: MouseEvent) {
-    const width = this.elementNative.offsetWidth;
-    const height = this.elementNative.offsetHeight;
+    const width = this.elementRef.nativeElement.offsetWidth;
+    const height = this.elementRef.nativeElement.offsetHeight;
     const cursorX = Math.min(Math.max(e.offsetX, 0), width);
     const cursorY = Math.min(Math.max(e.offsetY, 0), height);
     if (this.resizing) {
@@ -68,16 +66,15 @@ export class WindowsComponent {
   }
 
   @HostListener('mousedown', ['$event']) resizeStart(e) {
+    this.lastX = e.clientX;
+    this.lastY = e.clientY;
     this.resizing = true;
-    this.startX = e.clientX - e.target.offsetLeft;
-    this.startY = e.clientY - e.target.offsetHeight;
-    console.log(e.target.offsetLeft)
   }
 
   @HostListener('document:mousemove', ['$event']) resize(e: MouseEvent) {
     if (this.resizing) {
-      const x = e.clientX - this.startX;
-      const y = e.clientY - this.startY;
+      const x = e.clientX - this.lastX;
+      const y = e.clientY - this.lastY;
       const domWidth = this.elementRef.nativeElement.offsetWidth;
       const domHeight = this.elementRef.nativeElement.offsetHeight;
       const domTop = this.elementRef.nativeElement.offsetTop;
@@ -119,23 +116,20 @@ export class WindowsComponent {
           this.myHeight = domHeight + y;
           break;
       }
-      // 設定上一個滑鼠移動點
-      this.startX = e.clientX;
-      this.startY = e.clientY;
+      this.lastX = e.clientX;
+      this.lastY = e.clientY;
     }
   }
 
   @HostListener('document:mouseup', ['$event']) resizeStop() {
-    this.startX = 0;
-    this.startY = 0;
     this.resizing = false;
   }
 
   preventDefault(e: MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('preventDefault')
-    this.direction = DragDirection.Default;
+    if (!this.resizing) {
+      this.direction = DragDirection.Default;
+      e.stopPropagation();
+    }
   }
 
 }
