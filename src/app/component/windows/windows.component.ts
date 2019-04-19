@@ -24,6 +24,8 @@ export class WindowsComponent {
   myLeft = 50;
   myHeight = 300;
   myWidth = 300;
+  minWidth = 200;
+  minHeight = 200;
   resizing = false;
 
   @HostBinding('style')
@@ -75,45 +77,34 @@ export class WindowsComponent {
     if (this.resizing) {
       const x = e.clientX - this.lastX;
       const y = e.clientY - this.lastY;
-      const domWidth = this.elementRef.nativeElement.offsetWidth;
-      const domHeight = this.elementRef.nativeElement.offsetHeight;
-      const domTop = this.elementRef.nativeElement.offsetTop;
-      const domLeft = this.elementRef.nativeElement.offsetLeft;
-      // 移動量加上原本的寬度
       switch (this.direction) {
         case DragDirection.LeftTop:
-          this.myTop = domTop + y;
-          this.myHeight = domHeight - y;
-          this.myLeft = domLeft + x;
-          this.myWidth = domWidth - x;
+          this.setY(y, -y);
+          this.setX(x, -x);
           break;
         case DragDirection.LeftBottom:
-          this.myHeight = domHeight + y;
-          this.myLeft = domLeft + x;
-          this.myWidth = domWidth - x;
+          this.setX(x, -x);
+          this.setY(0, y);
           break;
         case DragDirection.Left:
-          this.myLeft = domLeft + x;
-          this.myWidth = domWidth - x;
+          this.setX(x, -x);
           break;
         case DragDirection.RightTop:
-          this.myTop = domTop + y;
-          this.myHeight = domHeight - y;
-          this.myWidth = domWidth + x;
+          this.setX(0, x);
+          this.setY(y, -y);
           break;
         case DragDirection.RightBottom:
-          this.myWidth = domWidth + x;
-          this.myHeight = domHeight + y;
+          this.setX(0, x);
+          this.setY(0, y);
           break;
         case DragDirection.Right:
-          this.myWidth = domWidth + x;
+          this.setX(0, x);
           break;
         case DragDirection.Top:
-          this.myTop = domTop + y;
-          this.myHeight = domHeight - y;
+          this.setY(y, -y);
           break;
         case DragDirection.Bottom:
-          this.myHeight = domHeight + y;
+          this.setY(0, y);
           break;
       }
       this.lastX = e.clientX;
@@ -129,6 +120,26 @@ export class WindowsComponent {
     if (!this.resizing) {
       this.direction = DragDirection.Default;
       e.stopPropagation();
+    }
+  }
+
+  setX(left: number, width: number) {
+    const maxRight = this.elementRef.nativeElement.parentElement.offsetWidth;
+    const canSetLeft = this.myLeft + left > 0 && this.myLeft + left < maxRight;
+    const canSetWidth = this.myWidth + width > this.minWidth && this.myWidth + this.myLeft + width < maxRight;
+    if (canSetLeft && canSetWidth) {
+      this.myLeft += left;
+      this.myWidth += width;
+    }
+  }
+
+  setY(top: number, height: number) {
+    const maxBottom = this.elementRef.nativeElement.parentElement.offsetHeight;
+    const canSetTop = this.myTop + top > 0 && this.myTop + top < maxBottom;
+    const canSetHeight = this.myHeight + height > this.minHeight && this.myHeight + this.myTop + height < maxBottom;
+    if (canSetTop && canSetHeight) {
+      this.myTop += top;
+      this.myHeight += height;
     }
   }
 
