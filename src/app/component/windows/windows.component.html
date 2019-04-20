@@ -3,12 +3,18 @@
      (mouseover)="changeCursor($event)"
      [ngStyle]="{'cursor':direction?.cursor}"> -->
 <div class="container"
-     [ngClass]="{'resizing': resizing}"
+     [ngClass]="{'unselect': isResizing || isDragging}"
      (mousemove)="preventDefault($event)">
-  <div class="title"
-       #title>
-    <img [src]="logo">
-    {{name}}
+  <div class="title">
+    <div class="drag"
+      (mousedown)="startDrag($event)"
+    >
+      <img [src]="logo">
+      {{name}}
+    </div>
+    <div class="btn_small">__</div>
+    <div class="btn_large">口</div>
+    <div class="btn_close">X</div>
   </div>
 </div>
 <!-- </div> -->

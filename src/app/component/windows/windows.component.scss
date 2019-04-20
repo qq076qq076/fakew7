@@ -14,7 +14,7 @@
         flex-direction: column;
 
 
-        &.resizing {
+        &.unselect {
             user-select: none;
         }
 
@@ -26,11 +26,17 @@
             display: flex;
             align-items: center;
 
-            img {
-                max-width: 12px;
-                max-height: 12px;
-                margin: 0 2px;
+            .drag {
+                display: flex;
+                flex: 1;
+
+                img {
+                    max-width: 12px;
+                    max-height: 12px;
+                    margin: 0 2px;
+                }
             }
+
         }
     }
 }

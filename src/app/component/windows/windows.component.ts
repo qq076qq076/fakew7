@@ -26,7 +26,8 @@ export class WindowsComponent {
   myWidth = 300;
   minWidth = 200;
   minHeight = 200;
-  resizing = false;
+  isResizing = false;
+  isDragging = false;
 
   @HostBinding('style')
   get style() {
@@ -43,7 +44,7 @@ export class WindowsComponent {
     const height = this.elementRef.nativeElement.offsetHeight;
     const cursorX = Math.min(Math.max(e.offsetX, 0), width);
     const cursorY = Math.min(Math.max(e.offsetY, 0), height);
-    if (this.resizing) {
+    if (this.isResizing) {
       return false;
     }
     if (cursorX < this.boundary) {
@@ -67,57 +68,32 @@ export class WindowsComponent {
     }
   }
 
-  @HostListener('mousedown', ['$event']) resizeStart(e) {
+  @HostListener('mousedown', ['$event']) resizeStart(e: MouseEvent) {
     this.lastX = e.clientX;
     this.lastY = e.clientY;
-    this.resizing = true;
+    this.isResizing = true;
   }
 
   @HostListener('document:mousemove', ['$event']) resize(e: MouseEvent) {
-    if (this.resizing) {
-      const x = e.clientX - this.lastX;
-      const y = e.clientY - this.lastY;
-      switch (this.direction) {
-        case DragDirection.LeftTop:
-          this.setY(y, -y);
-          this.setX(x, -x);
-          break;
-        case DragDirection.LeftBottom:
-          this.setX(x, -x);
-          this.setY(0, y);
-          break;
-        case DragDirection.Left:
-          this.setX(x, -x);
-          break;
-        case DragDirection.RightTop:
-          this.setX(0, x);
-          this.setY(y, -y);
-          break;
-        case DragDirection.RightBottom:
-          this.setX(0, x);
-          this.setY(0, y);
-          break;
-        case DragDirection.Right:
-          this.setX(0, x);
-          break;
-        case DragDirection.Top:
-          this.setY(y, -y);
-          break;
-        case DragDirection.Bottom:
-          this.setY(0, y);
-          break;
-      }
-      this.lastX = e.clientX;
-      this.lastY = e.clientY;
+    const x = e.clientX - this.lastX;
+    const y = e.clientY - this.lastY;
+    if (this.isResizing) {
+      this.resizeing(x, y);
     }
+    if (this.isDragging) {
+      this.dragging(x, y);
+    }
+    this.lastX = e.clientX;
+    this.lastY = e.clientY;
   }
 
   @HostListener('document:mouseup', ['$event']) resizeStop() {
-    this.resizing = false;
+    this.isResizing = false;
+    this.isDragging = false;
   }
 
   preventDefault(e: MouseEvent) {
-    if (!this.resizing) {
+    if (!this.isResizing) {
       this.direction = DragDirection.Default;
       e.stopPropagation();
     }
@@ -125,17 +101,24 @@ export class WindowsComponent {
 
   setX(left: number, width: number) {
     const maxRight = this.elementRef.nativeElement.parentElement.offsetWidth;
-    const canSetLeft = this.myLeft + left > 0 && this.myLeft + left < maxRight;
+    const canSetLeft = this.myLeft + left > 0 && this.myLeft + left + this.myWidth < maxRight;
     const canSetWidth = this.myWidth + width > this.minWidth && this.myWidth + this.myLeft + width < maxRight;
     if (canSetLeft && canSetWidth) {
       this.myLeft += left;
       this.myWidth += width;
     }
+    // if (canSetLeft) {
+    //   this.myLeft += left;
+    // }
+
+    // if (canSetWidth) {
+    //   this.myWidth += width;
+    // }
   }
 
   setY(top: number, height: number) {
     const maxBottom = this.elementRef.nativeElement.parentElement.offsetHeight;
-    const canSetTop = this.myTop + top > 0 && this.myTop + top < maxBottom;
+    const canSetTop = this.myTop + top > 0 && this.myTop + top + this.myHeight < maxBottom;
     const canSetHeight = this.myHeight + height > this.minHeight && this.myHeight + this.myTop + height < maxBottom;
     if (canSetTop && canSetHeight) {
       this.myTop += top;
@@ -143,4 +126,47 @@ export class WindowsComponent {
     }
   }
 
+  startDrag(e: MouseEvent) {
+    this.lastX = e.clientX;
+    this.lastY = e.clientY;
+    this.isDragging = true;
+  }
+
+  resizeing(x: number, y: number) {
+    switch (this.direction) {
+      case DragDirection.LeftTop:
+        this.setY(y, -y);
+        this.setX(x, -x);
+        break;
+      case DragDirection.LeftBottom:
+        this.setX(x, -x);
+        this.setY(0, y);
+        break;
+      case DragDirection.Left:
+        this.setX(x, -x);
+        break;
+      case DragDirection.RightTop:
+        this.setX(0, x);
+        this.setY(y, -y);
+        break;
+      case DragDirection.RightBottom:
+        this.setX(0, x);
+        this.setY(0, y);
+        break;
+      case DragDirection.Right:
+        this.setX(0, x);
+        break;
+      case DragDirection.Top:
+        this.setY(y, -y);
+        break;
+      case DragDirection.Bottom:
+        this.setY(0, y);
+        break;
+    }
+  }
+
+  dragging(x: number, y: number) {
+    this.setX(x, 0);
+    this.setY(y, 0);
+  }
 }
