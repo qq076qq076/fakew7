@@ -107,13 +107,6 @@ export class WindowsComponent {
       this.myLeft += left;
       this.myWidth += width;
     }
-    // if (canSetLeft) {
-    //   this.myLeft += left;
-    // }
-
-    // if (canSetWidth) {
-    //   this.myWidth += width;
-    // }
   }
 
   setY(top: number, height: number) {
