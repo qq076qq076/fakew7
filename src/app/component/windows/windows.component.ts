@@ -28,6 +28,7 @@ export class WindowsComponent {
   minHeight = 200;
   isResizing = false;
   isDragging = false;
+  isFocuse = true;
 
   @HostBinding('style')
   get style() {
