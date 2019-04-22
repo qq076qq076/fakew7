@@ -11,19 +11,92 @@
     background:
         linear-gradient(to bottom,
         rgb(144, 162, 185) 0%,
-        rgba(212, 143, 143, 0.6) 20%,
-        rgba(45, 37, 37, 0.6) 40%,
+        #434D57 30%,
+        #434D57 70%,
         rgb(165, 190, 219));
+    user-select: none;
 
-    &.open{
+    &.open {
         display: flex;
     }
 
+    .mask {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        bottom: -40px;
+        left: 0;
+        z-index: 99;
+    }
+
     .programs-list {
+        z-index: 100;
         width: 251px;
         background: white;
         border-radius: 3px;
         border: 1px solid rgb(123, 134, 145);
+        padding: 1px;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                height: 38px;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                margin: 1px 0;
+                box-sizing: border-box;
+                border: 1px solid transparent;
+
+                &:hover {
+                    border: 1px solid #A5B2B8;
+                    background: linear-gradient(to bottom, #DDEBFD, #C3DDFF);
+                }
+
+                img {
+                    width: 32px;
+                    height: 32px;
+                    margin: 0 2px;
+                }
+
+                .name {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    .default-item {
+        z-index: 100;
+        flex: 1;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            color: white;
+            padding: 0 5px;
+            padding-top: 90px;
+            font-size: 13px;
+
+            li {
+                padding: 0 5px;
+                height: 29px;
+                margin: 1px 0;
+                display: flex;
+                align-items: center;
+                border: 1px solid transparent;
+
+                &:hover {
+                    border: 1px solid #41464D;
+                    background: linear-gradient(to bottom, #A9AEB4, #616A73 45%, #434D57 50%, #5F6871);
+                    border-radius: 3px;
+                }
+            }
+        }
     }
 
 }

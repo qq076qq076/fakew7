@@ -1,6 +1,17 @@
+<div class="mask"
+     (click)="close()"></div>
 <div class="programs-list">
-
+  <ul>
+    <li *ngFor="let item of appList">
+      <img [src]="item.img">
+      <p class="name"> {{item.name}}</p>
+    </li>
+  </ul>
 </div>
 <div class="default-item">
-
+  <ul>
+    <li *ngFor="let item of rightList">
+      <p class="name"> {{item.name}}</p>
+    </li>
+  </ul>
 </div>
