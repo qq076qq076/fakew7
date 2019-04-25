@@ -17,11 +17,6 @@ export class WindowsComponent {
   name = 'Windows Internet Explorer';
   logo = '/assets/images/ie-icon.png';
   direction = DragDirection.Default;
-<<<<<<< HEAD
-  startX = 0;
-  startY = 0;
-=======
->>>>>>> 9b2d6aff19b1a99b4f372e6981edfaffdcebd369
   boundary = 15;
   lastX = 0;
   lastY = 0;
@@ -29,15 +24,11 @@ export class WindowsComponent {
   myLeft = 50;
   myHeight = 300;
   myWidth = 300;
-<<<<<<< HEAD
-  resizing = false;
-=======
   minWidth = 200;
   minHeight = 200;
   isResizing = false;
   isDragging = false;
   isFocuse = true;
->>>>>>> 9b2d6aff19b1a99b4f372e6981edfaffdcebd369
 
   @HostBinding('style')
   get style() {
@@ -78,59 +69,6 @@ export class WindowsComponent {
     }
   }
 
-<<<<<<< HEAD
-  @HostListener('mousedown', ['$event']) resizeStart(e) {
-    this.resizing = true;
-    console.log('mousedown')
-    console.log(e)
-  }
-
-  @HostListener('document:mousemove', ['$event']) resize(e: MouseEvent) {
-    if (this.resizing) {
-      const x = e.movementX;
-      const y = e.movementY;
-      const domWidth = this.elementRef.nativeElement.offsetWidth;
-      const domHeight = this.elementRef.nativeElement.offsetHeight;
-      const domTop = this.elementRef.nativeElement.offsetTop;
-      const domLeft = this.elementRef.nativeElement.offsetLeft;
-      // 移動量加上原本的寬度
-      switch (this.direction) {
-        case DragDirection.LeftTop:
-          this.myTop = domTop + y;
-          this.myHeight = domHeight - y;
-          this.myLeft = domLeft + x;
-          this.myWidth = domWidth - x;
-          break;
-        case DragDirection.LeftBottom:
-          this.myHeight = domHeight + y;
-          this.myLeft = domLeft + x;
-          this.myWidth = domWidth - x;
-          break;
-        case DragDirection.Left:
-          this.myLeft = domLeft + x;
-          this.myWidth = domWidth - x;
-          break;
-        case DragDirection.RightTop:
-          this.myTop = domTop + y;
-          this.myHeight = domHeight - y;
-          this.myWidth = domWidth + x;
-          break;
-        case DragDirection.RightBottom:
-          this.myWidth = domWidth + x;
-          this.myHeight = domHeight + y;
-          break;
-        case DragDirection.Right:
-          this.myWidth = domWidth + x;
-          break;
-        case DragDirection.Top:
-          this.myTop = domTop + y;
-          this.myHeight = domHeight - y;
-          break;
-        case DragDirection.Bottom:
-          this.myHeight = domHeight + y;
-          break;
-      }
-=======
   @HostListener('mousedown', ['$event']) resizeStart(e: MouseEvent) {
     this.lastX = e.clientX;
     this.lastY = e.clientY;
@@ -145,7 +83,6 @@ export class WindowsComponent {
     }
     if (this.isDragging) {
       this.dragging(x, y);
->>>>>>> 9b2d6aff19b1a99b4f372e6981edfaffdcebd369
     }
     this.lastX = e.clientX;
     this.lastY = e.clientY;
@@ -157,12 +94,6 @@ export class WindowsComponent {
   }
 
   preventDefault(e: MouseEvent) {
-<<<<<<< HEAD
-    this.direction = DragDirection.Default;
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('preventDefault')
-=======
     if (!this.isResizing) {
       this.direction = DragDirection.Default;
       e.stopPropagation();
@@ -177,7 +108,6 @@ export class WindowsComponent {
       this.myLeft += left;
       this.myWidth += width;
     }
->>>>>>> 9b2d6aff19b1a99b4f372e6981edfaffdcebd369
   }
 
   setY(top: number, height: number) {
