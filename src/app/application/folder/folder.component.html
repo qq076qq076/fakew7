@@ -1,6 +1,12 @@
 <app-windows>
-  <app-arrow></app-arrow>
-  <app-arrow class="next"></app-arrow>
+  <div class="url-bar">
+    <app-arrow></app-arrow>
+    <app-arrow class="next"></app-arrow>
+    <div *ngIf="!focusePath" class="url-show">
+      <!-- <img src="" alt=""> -->
+    </div>
+    <input *ngIf="focusePath" type="text" class="url-text" [value]="urlText" />
+  </div>
   <p>
     folder works!
   </p>

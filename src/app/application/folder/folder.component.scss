@@ -1,0 +1,23 @@
+.url-bar {
+    display: flex;
+
+    .url-show{
+        flex:1;
+        height: 20px;
+        background: #ffffff;
+        border: 1px solid transparent;
+        border-width: 1px;
+        border-image: linear-gradient(to bottom, #7a8087, #c6ccd2);
+        border-image-slice: 1;
+    }
+
+    .url-text {
+        flex:1;
+        height: 20px;
+        border: 1px solid transparent;
+        border-width: 1px;
+        border-image: linear-gradient(to bottom, #7a8087, #c6ccd2);
+        border-image-slice: 1;
+        outline: none;
+    }
+}
