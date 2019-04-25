@@ -12,21 +12,32 @@ export class WindowsComponent {
     private elementRef: ElementRef,
     private sanitizer: DomSanitizer,
   ) {
-    this.elementNative = elementRef.nativeElement;
   }
 
   name = 'Windows Internet Explorer';
   logo = '/assets/images/ie-icon.png';
   direction = DragDirection.Default;
+<<<<<<< HEAD
   startX = 0;
   startY = 0;
+=======
+>>>>>>> 9b2d6aff19b1a99b4f372e6981edfaffdcebd369
   boundary = 15;
-  elementNative: HTMLElement;
+  lastX = 0;
+  lastY = 0;
   myTop = 50;
   myLeft = 50;
   myHeight = 300;
   myWidth = 300;
+<<<<<<< HEAD
   resizing = false;
+=======
+  minWidth = 200;
+  minHeight = 200;
+  isResizing = false;
+  isDragging = false;
+  isFocuse = true;
+>>>>>>> 9b2d6aff19b1a99b4f372e6981edfaffdcebd369
 
   @HostBinding('style')
   get style() {
@@ -39,11 +50,11 @@ export class WindowsComponent {
   }
 
   @HostListener('mousemove', ['$event']) onmouseover(e: MouseEvent) {
-    const width = this.elementNative.offsetWidth;
-    const height = this.elementNative.offsetHeight;
+    const width = this.elementRef.nativeElement.offsetWidth;
+    const height = this.elementRef.nativeElement.offsetHeight;
     const cursorX = Math.min(Math.max(e.offsetX, 0), width);
     const cursorY = Math.min(Math.max(e.offsetY, 0), height);
-    if (this.resizing) {
+    if (this.isResizing) {
       return false;
     }
     if (cursorX < this.boundary) {
@@ -67,6 +78,7 @@ export class WindowsComponent {
     }
   }
 
+<<<<<<< HEAD
   @HostListener('mousedown', ['$event']) resizeStart(e) {
     this.resizing = true;
     console.log('mousedown')
@@ -118,20 +130,107 @@ export class WindowsComponent {
           this.myHeight = domHeight + y;
           break;
       }
+=======
+  @HostListener('mousedown', ['$event']) resizeStart(e: MouseEvent) {
+    this.lastX = e.clientX;
+    this.lastY = e.clientY;
+    this.isResizing = true;
+  }
+
+  @HostListener('document:mousemove', ['$event']) resize(e: MouseEvent) {
+    const x = e.clientX - this.lastX;
+    const y = e.clientY - this.lastY;
+    if (this.isResizing) {
+      this.resizeing(x, y);
     }
+    if (this.isDragging) {
+      this.dragging(x, y);
+>>>>>>> 9b2d6aff19b1a99b4f372e6981edfaffdcebd369
+    }
+    this.lastX = e.clientX;
+    this.lastY = e.clientY;
   }
 
   @HostListener('document:mouseup', ['$event']) resizeStop() {
-    this.startX = 0;
-    this.startY = 0;
-    this.resizing = false;
+    this.isResizing = false;
+    this.isDragging = false;
   }
 
   preventDefault(e: MouseEvent) {
+<<<<<<< HEAD
     this.direction = DragDirection.Default;
     e.preventDefault();
     e.stopPropagation();
     console.log('preventDefault')
+=======
+    if (!this.isResizing) {
+      this.direction = DragDirection.Default;
+      e.stopPropagation();
+    }
   }
 
+  setX(left: number, width: number) {
+    const maxRight = this.elementRef.nativeElement.parentElement.offsetWidth;
+    const canSetLeft = this.myLeft + left > 0 && this.myLeft + left + this.myWidth < maxRight;
+    const canSetWidth = this.myWidth + width > this.minWidth && this.myWidth + this.myLeft + width < maxRight;
+    if (canSetLeft && canSetWidth) {
+      this.myLeft += left;
+      this.myWidth += width;
+    }
+>>>>>>> 9b2d6aff19b1a99b4f372e6981edfaffdcebd369
+  }
+
+  setY(top: number, height: number) {
+    const maxBottom = this.elementRef.nativeElement.parentElement.offsetHeight;
+    const canSetTop = this.myTop + top > 0 && this.myTop + top + this.myHeight < maxBottom;
+    const canSetHeight = this.myHeight + height > this.minHeight && this.myHeight + this.myTop + height < maxBottom;
+    if (canSetTop && canSetHeight) {
+      this.myTop += top;
+      this.myHeight += height;
+    }
+  }
+
+  startDrag(e: MouseEvent) {
+    this.lastX = e.clientX;
+    this.lastY = e.clientY;
+    this.isDragging = true;
+  }
+
+  resizeing(x: number, y: number) {
+    switch (this.direction) {
+      case DragDirection.LeftTop:
+        this.setY(y, -y);
+        this.setX(x, -x);
+        break;
+      case DragDirection.LeftBottom:
+        this.setX(x, -x);
+        this.setY(0, y);
+        break;
+      case DragDirection.Left:
+        this.setX(x, -x);
+        break;
+      case DragDirection.RightTop:
+        this.setX(0, x);
+        this.setY(y, -y);
+        break;
+      case DragDirection.RightBottom:
+        this.setX(0, x);
+        this.setY(0, y);
+        break;
+      case DragDirection.Right:
+        this.setX(0, x);
+        break;
+      case DragDirection.Top:
+        this.setY(y, -y);
+        break;
+      case DragDirection.Bottom:
+        this.setY(0, y);
+        break;
+    }
+  }
+
+  dragging(x: number, y: number) {
+    this.setX(x, 0);
+    this.setY(y, 0);
+  }
 }

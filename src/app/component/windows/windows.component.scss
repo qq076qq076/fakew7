@@ -3,7 +3,8 @@
     border: 1px solid #8b8c8f;
     border-radius: 6px;
     background: #d8e4f3;
-    padding: 15px;
+    background: linear-gradient(to bottom, #9EB2CD, #C4CEED 3%);
+    padding: 5px;
     position: absolute;
     box-sizing: border-box;
 
@@ -13,6 +14,140 @@
         display: flex;
         flex-direction: column;
 
+        .btn {
+            width: 28px;
+            height: 14px;
+            border-radius: 2px;
+            border: 1px solid #6c88a5;
+            margin: 0 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 3px 0;
+            box-sizing: border-box;
+        }
+
+        .btn_small {
+            background: transparent;
+
+            &.focuse {
+                background: linear-gradient(to bottom, #C9DCF0 35%, #A3B8D0 50%, #AEC4DD 100%);
+
+                &:hover {
+                    background: linear-gradient(to bottom, #A0D1F6 35%, #2E77A9 50%, #37B3DC 100%);
+                }
+
+                &:active {
+                    background: linear-gradient(to bottom, #6C889D 35%, #203E59 50%, #36C0BB 100%);
+                }
+            }
+
+            &::before {
+                content: '';
+                box-sizing: border-box;
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                width: 100%;
+                height: 100%;
+
+                position: absolute;
+                top: 0;
+            }
+
+            &::after {
+                content: '';
+                width: 8px;
+                height: 2px;
+                border: 1px solid #637181;
+                background: #E6DBDB;
+                align-self: flex-end;
+            }
+        }
+
+        .btn_large {
+            background: transparent;
+
+            &.focuse {
+                background: linear-gradient(to bottom, #C9DCF0 35%, #A3B8D0 50%, #AEC4DD 100%);
+
+                &:hover {
+                    background: linear-gradient(to bottom, #A0D1F6 35%, #2E77A9 50%, #37B3DC 100%);
+                }
+
+                &:active {
+                    background: linear-gradient(to bottom, #6C889D 35%, #203E59 50%, #36C0BB 100%);
+                }
+            }
+
+            &::before {
+                content: '';
+                width: 5px;
+                height: 2px;
+                border: 2px solid #E6DBDB;
+                border-radius: 1px;
+                box-shadow: 0 0 0 1px #818D9C,
+                    0 0 0 1px #818D9C inset;
+            }
+        }
+
+        .btn_close {
+            background: transparent;
+
+            &.focuse {
+                background: linear-gradient(to bottom, #F1B9B7 35%, #AF4E39 50%, #CA7C65 100%);
+
+                &:hover {
+                    background: linear-gradient(to bottom, #F2CCC2 35%, #D74E22 50%, #DC6C3A 100%);
+                }
+
+                &:active {
+                    background: linear-gradient(to bottom, #C19C85 35%, #782002 50%, #DBB273 100%);
+                }
+            }
+
+            div {
+
+                &:nth-child(1) {
+                    position: absolute;
+                    width: 10px;
+                    height: 2px;
+                    box-shadow: 0 0 0 1px #637181;
+                    position: absolute;
+                    transform: rotate(45deg);
+                }
+
+                &:nth-child(2) {
+                    position: absolute;
+                    width: 10px;
+                    height: 2px;
+                    box-shadow: 0 0 0 1px #637181;
+                    position: absolute;
+                    transform: rotate(-45deg);
+                }
+
+                &:nth-child(3) {
+                    width: 10px;
+                    height: 2px;
+
+                    background: #E6DBDB;
+                    position: absolute;
+                    transform: rotate(45deg);
+                }
+
+                &:nth-child(4) {
+                    width: 10px;
+                    height: 2px;
+                    background: #E6DBDB;
+                    position: absolute;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        &.unselect {
+            user-select: none;
+        }
+
         .title {
             height: 20px;
             display: flex;
@@ -21,11 +156,17 @@
             display: flex;
             align-items: center;
 
-            img {
-                max-width: 12px;
-                max-height: 12px;
-                margin: 0 2px;
+            .drag {
+                display: flex;
+                flex: 1;
+
+                img {
+                    max-width: 12px;
+                    max-height: 12px;
+                    margin: 0 2px;
+                }
             }
+
         }
     }
 }

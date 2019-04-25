@@ -1,6 +1,6 @@
 <div class="start">
   <i (click)="toggleProgrames()" [ngClass]="{'open':openPrograms}"></i>
-  <app-programs [isOpen]="openPrograms"></app-programs>
+  <app-programs [isOpen]="openPrograms" (toggleProgrames)="toggleProgrames()"></app-programs>
 </div>
 <div class="tool-list">
   <div class="icon" *ngFor="let item of appList" (click)="toggleApp(item)" [ngClass]="{'open': item.isOpen}">

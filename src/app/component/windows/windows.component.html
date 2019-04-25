@@ -3,13 +3,23 @@
      (mouseover)="changeCursor($event)"
      [ngStyle]="{'cursor':direction?.cursor}"> -->
 <div class="container"
-     (mouseenter)="preventDefault($event)"
-     (mousedown)="preventDefault($event)"
-     >
-  <div class="title"
-       #title>
-    <img [src]="logo">
-    {{name}}
+     [ngClass]="{'unselect': isResizing || isDragging}"
+     (mousemove)="preventDefault($event)">
+  <div class="title">
+    <div class="drag"
+      (mousedown)="startDrag($event)"
+    >
+      <img [src]="logo">
+      {{name}}
+    </div>
+    <div class="btn btn_small" [ngClass]="{'focuse': isFocuse}"></div>
+    <div class="btn btn_large" [ngClass]="{'focuse': isFocuse}"></div>
+    <div class="btn btn_close" [ngClass]="{'focuse': isFocuse}">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </div>
 <!-- </div> -->
