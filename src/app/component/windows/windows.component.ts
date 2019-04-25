@@ -14,8 +14,9 @@ export class WindowsComponent {
   ) {
   }
 
-  name = 'Windows Internet Explorer';
-  logo = '/assets/images/ie-icon.png';
+  @Input() name = '';
+  @Input() logo = '';
+
   direction = DragDirection.Default;
   boundary = 15;
   lastX = 0;
