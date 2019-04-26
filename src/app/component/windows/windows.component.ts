@@ -102,7 +102,7 @@ export class WindowsComponent {
   }
 
   setX(left: number, width: number) {
-    const maxRight = this.elementRef.nativeElement.parentElement.offsetWidth;
+    const maxRight = this.elementRef.nativeElement.closest('div.desktop').offsetWidth;
     const canSetLeft = this.myLeft + left > 0 && this.myLeft + left + this.myWidth < maxRight;
     const canSetWidth = this.myWidth + width > this.minWidth && this.myWidth + this.myLeft + width < maxRight;
     if (canSetLeft && canSetWidth) {
@@ -112,7 +112,7 @@ export class WindowsComponent {
   }
 
   setY(top: number, height: number) {
-    const maxBottom = this.elementRef.nativeElement.parentElement.offsetHeight;
+    const maxBottom = this.elementRef.nativeElement.closest('div.desktop').offsetHeight;
     const canSetTop = this.myTop + top > 0 && this.myTop + top + this.myHeight < maxBottom;
     const canSetHeight = this.myHeight + height > this.minHeight && this.myHeight + this.myTop + height < maxBottom;
     if (canSetTop && canSetHeight) {
