@@ -9,6 +9,22 @@
         border-width: 1px;
         border-image: linear-gradient(to bottom, #7a8087, #c6ccd2);
         border-image-slice: 1;
+        font-size: 12px;
+        display:flex;
+
+        .path{
+          margin-left:5px;
+          position: relative;
+          display: flex;
+          align-items: baseline;
+          &::after{
+            content:'';
+            margin-left: 5px;
+            border-width: 3px;
+            border-color: transparent transparent transparent #000105;
+            border-style: solid;
+          }
+        }
     }
 
     .url-text {
@@ -19,5 +35,6 @@
         border-image: linear-gradient(to bottom, #7a8087, #c6ccd2);
         border-image-slice: 1;
         outline: none;
+        padding: 0 5px;
     }
 }

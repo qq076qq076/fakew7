@@ -2,10 +2,13 @@
   <div class="url-bar">
     <app-arrow></app-arrow>
     <app-arrow class="next"></app-arrow>
-    <div *ngIf="!focusePath" class="url-show">
+    <div *ngIf="!focusePath" class="url-show" (dblclick)="setFocuse()">
       <!-- <img src="" alt=""> -->
+      <div class="path" *ngFor="let path of fullPathList">
+        {{path}}
+      </div>
     </div>
-    <input *ngIf="focusePath" type="text" class="url-text" [value]="urlText" />
+    <input *ngIf="focusePath" type="text" class="url-text" [value]="urlText" (click)="stopPropagation($event)" />
   </div>
   <p>
     folder works!
