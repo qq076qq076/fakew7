@@ -7,6 +7,7 @@ import { ProgramsComponent } from './component/programs/programs.component';
 import { WindowsComponent } from './component/windows/windows.component';
 import { FolderComponent } from './application/folder/folder.component';
 import { ArrowComponent } from './component/arrow/arrow.component';
+import { NotepadComponent } from './application/notepad/notepad.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ArrowComponent } from './component/arrow/arrow.component';
     ProgramsComponent,
     WindowsComponent,
     FolderComponent,
-    ArrowComponent
+    ArrowComponent,
+    NotepadComponent
   ],
   imports: [
     BrowserModule
