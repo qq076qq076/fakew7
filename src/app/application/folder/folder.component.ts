@@ -19,7 +19,7 @@ export class FolderComponent implements OnInit {
   folderMap: Folder[] = [
     {
       path: '電腦',
-      icon: '',
+      icon: 'assets/images/computer.ico',
       directory: [
         {
           path: 'C:',
@@ -42,6 +42,7 @@ export class FolderComponent implements OnInit {
   ];
   // fullPathList: string[] = [this.folderMap[0].path];
   fullPathList: string[] = ['電腦', 'C:', 'Program Files'];
+  icon;
   urlText = '';
 
   ngOnInit() {
@@ -54,6 +55,9 @@ export class FolderComponent implements OnInit {
       this.urlText = thisPath.path;
     } else {
       this.urlText += (this.urlText) ? '\\' + thisPath.path : thisPath.path;
+    }
+    if (index === 0) {
+      this.icon = thisPath.icon;
     }
     if (this.fullPathList.length > index + 1) {
       this.getUrlText(thisPath.directory, index + 1);

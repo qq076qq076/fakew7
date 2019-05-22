@@ -3,7 +3,7 @@
     <app-arrow></app-arrow>
     <app-arrow class="next"></app-arrow>
     <div *ngIf="!focusePath" class="url-show" (dblclick)="setFocuse()">
-      <!-- <img src="" alt=""> -->
+      <img [src]="icon" alt="">
       <div class="path" *ngFor="let path of fullPathList">
         {{path}}
       </div>

@@ -1,13 +1,17 @@
-<div class="start-anim" *ngIf="starting">
-  <div class="gif">
-    <img src="assets/images/start.gif" />
-    <h3>正在啟動 Windows</h3>
+<ng-container *ngIf="starting; else elseTemplate">
+  <div class="start-anim">
+    <div class="gif">
+      <img src="assets/images/start.gif" />
+      <h3>正在啟動 Windows</h3>
+    </div>
+    <p class="copyright">© Microsoft Corporation</p>
   </div>
-  <p class="copyright">© Microsoft Corporation</p>
-</div>
-<div class="container">
-  <div class="desktop">
-    <app-folder></app-folder>
+</ng-container>
+<ng-template #elseTemplate>
+  <div class="container">
+    <div class="desktop">
+      <app-folder></app-folder>
+    </div>
+    <app-toolbar></app-toolbar>
   </div>
-  <app-toolbar></app-toolbar>
-</div>
+</ng-template>
