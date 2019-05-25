@@ -1,16 +1,41 @@
-<app-windows>
+<app-windows minWidth="400" minHeight="400">
   <div class="url-bar">
-    <app-arrow></app-arrow>
+    <app-arrow (click)="toLast()"></app-arrow>
     <app-arrow class="next"></app-arrow>
-    <div *ngIf="!focusePath" class="url-show" (dblclick)="setFocuse()">
-      <img [src]="icon" alt="">
-      <div class="path" *ngFor="let path of fullPathList">
+    <div *ngIf="!focusePath"
+         class="url-show"
+         (dblclick)="focusePath = true">
+      <img [src]="currentFolder.icon"
+           alt="">
+      <div *ngFor="let path of getUrlList()"
+           class="path">
         {{path}}
       </div>
     </div>
-    <input *ngIf="focusePath" type="text" class="url-text" [value]="urlText" (click)="stopPropagation($event)" />
+    <input *ngIf="focusePath"
+           type="text"
+           class="url-text"
+           [(ngModel)]="pathInput"
+           (change)="console()"
+           (keyup.enter)="searchPath()"
+           (click)="stopPropagation($event)" />
   </div>
-  <p>
-    folder works!
-  </p>
+  <div class="content">
+    <div class="map"></div>
+    <ng-container *ngIf="currentFolder.directory.length>0; else elseTemplate">
+      <div class="app active"
+           [ngClass]="{'active': active===folder}"
+           (click)="active=folder"
+           (dblclick)="toggle(folder)"
+           *ngFor="let folder of currentFolder.directory">
+        <img [src]="folder.icon" />
+        <p class="name">{{folder.name}}</p>
+      </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div class="empty">
+        這個資料夾是空的
+      </div>
+    </ng-template>
+  </div>
 </app-windows>

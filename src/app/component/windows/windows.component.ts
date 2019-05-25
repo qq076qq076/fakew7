@@ -16,6 +16,8 @@ export class WindowsComponent {
 
   @Input() name = '';
   @Input() logo = '';
+  // @Input() minWidth = 200;
+  // @Input() minHeight = 200;
 
   direction = DragDirection.Default;
   boundary = 15;
