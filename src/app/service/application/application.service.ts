@@ -16,22 +16,22 @@ export class ApplicationService {
   private applicationList: IApplication[] = [
     {
       name: 'ie',
-      img: '/assets/images/ie-icon.png',
+      img: 'assets/images/ie-icon.png',
       isOpen: false,
     },
     {
       name: 'player',
-      img: '/assets/images/player-icon.png',
+      img: 'assets/images/player-icon.png',
       isOpen: false,
     },
     {
       name: 'chrome',
-      img: '/assets/images/chrome-icon.png',
+      img: 'assets/images/chrome-icon.png',
       isOpen: false,
     },
     {
       name: 'line',
-      img: '/assets/images/line-icon.png',
+      img: 'assets/images/line-icon.png',
       isOpen: false,
     },
   ];
