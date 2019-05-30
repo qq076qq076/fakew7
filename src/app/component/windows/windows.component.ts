@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, HostBinding, Input, ComponentFactoryResolver } from '@angular/core';
+import { Component, ElementRef, HostListener, HostBinding, Input, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { DragDirection } from 'src/app/type/drag-direction/drag-direction';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -7,17 +7,24 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './windows.component.html',
   styleUrls: ['./windows.component.scss']
 })
-export class WindowsComponent {
+export class WindowsComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private sanitizer: DomSanitizer,
-  ) {
-  }
+  ) { }
 
   @Input() name = '';
   @Input() logo = '';
-  // @Input() minWidth = 200;
-  // @Input() minHeight = 200;
+  @Input()
+  set minWidth(value: string | number) {
+    const num = (typeof value === 'string') ? parseInt(value, 10) : value;
+    this._minWidth = num || 200;
+  };
+  @Input()
+  set minHeight(value: string | number) {
+    const num = (typeof value === 'string') ? parseInt(value, 10) : value;
+    this._minHeight = num || 200;
+  };
 
   direction = DragDirection.Default;
   boundary = 15;
@@ -25,13 +32,18 @@ export class WindowsComponent {
   lastY = 0;
   myTop = 50;
   myLeft = 50;
-  myHeight = 300;
-  myWidth = 300;
-  minWidth = 200;
-  minHeight = 200;
+  myWidth: number;
+  myHeight: number;
+  _minWidth: number;
+  _minHeight: number;
   isResizing = false;
   isDragging = false;
   isFocuse = true;
+
+  ngOnInit() {
+    this.myWidth = this._minWidth;
+    this.myHeight = this._minHeight;
+  }
 
   @HostBinding('style')
   get style() {
@@ -106,7 +118,7 @@ export class WindowsComponent {
   setX(left: number, width: number) {
     const maxRight = this.elementRef.nativeElement.closest('div.desktop').offsetWidth;
     const canSetLeft = this.myLeft + left > 0 && this.myLeft + left + this.myWidth < maxRight;
-    const canSetWidth = this.myWidth + width > this.minWidth && this.myWidth + this.myLeft + width < maxRight;
+    const canSetWidth = this.myWidth + width > this._minWidth && this.myWidth + this.myLeft + width < maxRight;
     if (canSetLeft && canSetWidth) {
       this.myLeft += left;
       this.myWidth += width;
@@ -116,7 +128,7 @@ export class WindowsComponent {
   setY(top: number, height: number) {
     const maxBottom = this.elementRef.nativeElement.closest('div.desktop').offsetHeight;
     const canSetTop = this.myTop + top > 0 && this.myTop + top + this.myHeight < maxBottom;
-    const canSetHeight = this.myHeight + height > this.minHeight && this.myHeight + this.myTop + height < maxBottom;
+    const canSetHeight = this.myHeight + height > this._minHeight && this.myHeight + this.myTop + height < maxBottom;
     if (canSetTop && canSetHeight) {
       this.myTop += top;
       this.myHeight += height;
