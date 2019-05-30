@@ -1,12 +1,5 @@
 import { Component, OnInit, Type, HostListener } from '@angular/core';
-
-interface Folder {
-  path: string;
-  name: string;
-  icon: string;
-  component?: Type<any>;
-  directory: Folder[];
-}
+import { Computer, FolderMap, Folder } from './folder';
 
 @Component({
   selector: 'app-folder',
@@ -17,47 +10,14 @@ export class FolderComponent implements OnInit {
 
   constructor() { }
   focusePath = false;
-  readonly folderMap: Folder[] = [
-    {
-      path: '電腦',
-      name: '電腦',
-      icon: 'assets/images/computer.ico',
-      directory: [
-        {
-          name: '本機磁碟(C:)',
-          path: '電腦\\本機磁碟(C:)',
-          icon: 'assets/images/d.ico',
-          directory: [
-            {
-              path: '電腦\\本機磁碟(C:)\\Program Files',
-              name: 'Program Files',
-              icon: 'assets/images/folder.ico',
-              directory: []
-            },
-            {
-              path: '電腦\\本機磁碟(C:)\\使用者',
-              name: '使用者',
-              icon: 'assets/images/user folder.ico',
-              directory: []
-            },
-          ]
-        },
-        {
-          path: '電腦\\固態硬碟(D:)',
-          name: '固態硬碟(D:)',
-          icon: 'assets/images/d.ico',
-          directory: []
-        }
-      ],
-    }
-  ];
   readonly emptyFolder: Folder = {
     path: '',
     name: '',
     icon: '',
     directory: []
   };
-  currentFolder: Folder = this.folderMap[0];
+  readonly computer = Computer;
+  currentFolder: Folder = Computer;
   pathInput: string = this.currentFolder.path;
   active;
 
@@ -74,7 +34,9 @@ export class FolderComponent implements OnInit {
     this.currentFolder = folder || this.emptyFolder;
   }
 
-  console() { console.log(this.pathInput) }
+  getByPath() {
+
+  }
 
   toggle(folder: Folder) {
     this.currentFolder = folder;
@@ -88,7 +50,7 @@ export class FolderComponent implements OnInit {
     if (folder) {
       this.currentFolder = folder;
     } else {
-      this.currentFolder = this.folderMap[0];
+      this.currentFolder = Computer;
     }
   }
 
@@ -96,7 +58,7 @@ export class FolderComponent implements OnInit {
 
   }
 
-  deepSearch(path: string, folderList: Folder[] = this.folderMap): Folder | null {
+  deepSearch(path: string, folderList: Folder[] = FolderMap): Folder | null {
     for (const folder of folderList) {
       if (path === folder.path) {
         return folder;

@@ -1,12 +1,12 @@
-<app-windows minWidth="400" minHeight="400">
+<app-windows minWidth="630"
+             minHeight="450">
   <div class="url-bar">
     <app-arrow (click)="toLast()"></app-arrow>
     <app-arrow class="next"></app-arrow>
     <div *ngIf="!focusePath"
          class="url-show"
          (dblclick)="focusePath = true">
-      <img [src]="currentFolder.icon"
-           alt="">
+      <img [src]="currentFolder.icon">
       <div *ngFor="let path of getUrlList()"
            class="path">
         {{path}}
@@ -16,12 +16,29 @@
            type="text"
            class="url-text"
            [(ngModel)]="pathInput"
-           (change)="console()"
            (keyup.enter)="searchPath()"
            (click)="stopPropagation($event)" />
   </div>
   <div class="content">
-    <div class="map"></div>
+    <div class="map">
+      <div class="block">
+        <div class="list"
+             (dblclick)="toggle(computer)"
+             [ngClass]="{'active': currentFolder === computer}">
+          <img [src]="computer.icon" />
+          <p class="name">{{computer.name}}</p>
+        </div>
+        <ul>
+          <li *ngFor="let directory of computer.directory"
+              [ngClass]="{'active': currentFolder === directory}"
+              (dblclick)="toggle(directory)"
+              class="list">
+            <img [src]="directory.icon" />
+            <p class="name">{{directory.name}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
     <ng-container *ngIf="currentFolder.directory.length>0; else elseTemplate">
       <div class="app active"
            [ngClass]="{'active': active===folder}"
