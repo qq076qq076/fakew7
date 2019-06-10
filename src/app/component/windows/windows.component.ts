@@ -118,7 +118,7 @@ export class WindowsComponent implements OnInit {
   setX(left: number, width: number) {
     const maxRight = this.elementRef.nativeElement.closest('div.desktop').offsetWidth;
     const canSetLeft = this.myLeft + left > 0 && this.myLeft + left + this.myWidth < maxRight;
-    const canSetWidth = this.myWidth + width > this._minWidth && this.myWidth + this.myLeft + width < maxRight;
+    const canSetWidth = this.myWidth + width >= this._minWidth && this.myWidth + this.myLeft + width < maxRight;
     if (canSetLeft && canSetWidth) {
       this.myLeft += left;
       this.myWidth += width;
@@ -128,7 +128,7 @@ export class WindowsComponent implements OnInit {
   setY(top: number, height: number) {
     const maxBottom = this.elementRef.nativeElement.closest('div.desktop').offsetHeight;
     const canSetTop = this.myTop + top > 0 && this.myTop + top + this.myHeight < maxBottom;
-    const canSetHeight = this.myHeight + height > this._minHeight && this.myHeight + this.myTop + height < maxBottom;
+    const canSetHeight = this.myHeight + height >= this._minHeight && this.myHeight + this.myTop + height < maxBottom;
     if (canSetTop && canSetHeight) {
       this.myTop += top;
       this.myHeight += height;
@@ -139,6 +139,7 @@ export class WindowsComponent implements OnInit {
     this.lastX = e.clientX;
     this.lastY = e.clientY;
     this.isDragging = true;
+    console.log('isDragging')
   }
 
   resizeing(x: number, y: number) {
