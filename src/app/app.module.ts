@@ -9,6 +9,7 @@ import { WindowsComponent } from './component/windows/windows.component';
 import { FolderComponent } from './application/folder/folder.component';
 import { ArrowComponent } from './component/arrow/arrow.component';
 import { NotepadComponent } from './application/notepad/notepad.component';
+import { EntryComponent } from './component/entry/entry.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,17 @@ import { NotepadComponent } from './application/notepad/notepad.component';
     WindowsComponent,
     FolderComponent,
     ArrowComponent,
-    NotepadComponent
+    NotepadComponent,
+    EntryComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    FolderComponent,
+  ]
 })
 export class AppModule { }

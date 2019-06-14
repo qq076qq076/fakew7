@@ -8,6 +8,18 @@
     position: absolute;
     box-sizing: border-box;
 
+    &.maxSize {
+        position: relative;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+
+    &.hide {
+        display: none;
+    }
+
     .container {
         height: 100%;
         width: 100%;

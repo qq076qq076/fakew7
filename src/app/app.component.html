@@ -10,7 +10,11 @@
 <ng-template #elseTemplate>
   <div class="container">
     <div class="desktop">
-      <app-folder></app-folder>
+      <ng-container *ngFor="let item of proccessList">
+        <ng-container *ngIf="item.component">
+          <app-entry [app]="item" [isHidden]="item.isHidden"></app-entry>
+        </ng-container>
+      </ng-container>
     </div>
     <app-toolbar></app-toolbar>
   </div>

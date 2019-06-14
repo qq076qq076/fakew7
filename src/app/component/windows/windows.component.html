@@ -3,14 +3,22 @@
      (mousemove)="preventDefault($event)">
   <div class="title">
     <div class="drag"
-      (mousedown)="startDrag($event)"
-    >
+         (mousedown)="startDrag($event)"
+         (dblclick)="large()">
       <img [src]="logo">
       {{name}}
     </div>
-    <div class="btn btn_small" [ngClass]="{'focuse': isFocuse}"></div>
-    <div class="btn btn_large" [ngClass]="{'focuse': isFocuse}"></div>
-    <div class="btn btn_close" [ngClass]="{'focuse': isFocuse}">
+    <div class="btn btn_small"
+         [ngClass]="{'focuse': isFocuse}"
+         (click)="hide()">
+    </div>
+    <div class="btn btn_large"
+         [ngClass]="{'focuse': isFocuse}"
+         (click)="large()">
+    </div>
+    <div class="btn btn_close"
+         [ngClass]="{'focuse': isFocuse}"
+         (click)="close()">
       <div></div>
       <div></div>
       <div></div>

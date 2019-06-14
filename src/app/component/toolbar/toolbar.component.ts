@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationService, IApplication } from 'src/app/service/application/application.service';
+import { ApplicationService } from 'src/app/service/application/application.service';
+import { Application } from 'src/app/service/application/application';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,28 +9,45 @@ import { ApplicationService, IApplication } from 'src/app/service/application/ap
 })
 export class ToolbarComponent implements OnInit {
 
-  appList: IApplication[] = [];
+  appList: Application[] = [
+    Application.Folder,
+    Application.IE,
+    Application.Player,
+    Application.Chrome,
+    Application.Line,
+  ];
+  proccess: Application[] = [];
   openPrograms = false;
 
   constructor(
     private appService: ApplicationService
   ) {
-    appService.getApplication().subscribe((appList: IApplication[]) => {
-      this.appList = appList;
+    appService.getApplication().subscribe((proccessList: Application[]) => {
+      proccessList.forEach((proccess: Application) => {
+        // 在proccess中的不是預設顯示項目  要加到工具列
+        const has = this.appList.find((app: Application) => app === proccess);
+        if (!has) {
+          this.appList.push(proccess);
+        }
+      });
+      this.proccess = proccessList;
+
     });
   }
 
   ngOnInit() {
   }
 
-  toggleApp(app: IApplication) {
-    console.log(app)
+  toggleApp(app: Application) {
     this.appService.clickApp(app);
+  }
+
+  isOpen(app: Application) {
+    return this.proccess.find((item) => item === app);
   }
 
   toggleProgrames() {
     this.openPrograms = !this.openPrograms;
-    console.log(this.openPrograms)
   }
 
 }

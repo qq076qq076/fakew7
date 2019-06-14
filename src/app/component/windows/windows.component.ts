@@ -1,6 +1,17 @@
-import { Component, ElementRef, HostListener, HostBinding, Input, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, HostBinding, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DragDirection } from 'src/app/type/drag-direction/drag-direction';
 import { DomSanitizer } from '@angular/platform-browser';
+
+export class Windows {
+  static appName: string;
+  isMin: boolean;
+  isMax: boolean;
+  setMin: EventEmitter<boolean>;
+  setClose: EventEmitter<{}>;
+  toggleMax: () => void;
+  toggleMin: (isMin: boolean) => void;
+  toggleClose: () => void;
+}
 
 @Component({
   selector: 'app-windows',
@@ -19,12 +30,15 @@ export class WindowsComponent implements OnInit {
   set minWidth(value: string | number) {
     const num = (typeof value === 'string') ? parseInt(value, 10) : value;
     this._minWidth = num || 200;
-  };
+  }
   @Input()
   set minHeight(value: string | number) {
     const num = (typeof value === 'string') ? parseInt(value, 10) : value;
     this._minHeight = num || 200;
-  };
+  }
+  @Output() toggleMax = new EventEmitter();
+  @Output() toggleMin = new EventEmitter<boolean>();
+  @Output() toggleClose = new EventEmitter();
 
   direction = DragDirection.Default;
   boundary = 15;
@@ -52,7 +66,13 @@ export class WindowsComponent implements OnInit {
     const height = this.myHeight ? this.myHeight + 'px' : 'auto';
     const left = this.myLeft ? this.myLeft + 'px' : 'auto';
     const width = this.myWidth ? this.myWidth + 'px' : 'auto';
-    return this.sanitizer.bypassSecurityTrustStyle(`cursor: ${cursor};top: ${top}; height: ${height};left: ${left};width: ${width}`);
+    return this.sanitizer.bypassSecurityTrustStyle(`
+      cursor: ${cursor};
+      top: ${top};
+      height: ${height};
+      left: ${left};
+      width: ${width};
+    `);
   }
 
   @HostListener('mousemove', ['$event']) onmouseover(e: MouseEvent) {
@@ -139,7 +159,6 @@ export class WindowsComponent implements OnInit {
     this.lastX = e.clientX;
     this.lastY = e.clientY;
     this.isDragging = true;
-    console.log('isDragging')
   }
 
   resizeing(x: number, y: number) {
@@ -178,5 +197,17 @@ export class WindowsComponent implements OnInit {
   dragging(x: number, y: number) {
     this.setX(x, 0);
     this.setY(y, 0);
+  }
+
+  hide() {
+    this.toggleMin.emit();
+  }
+
+  large() {
+    this.toggleMax.emit();
+  }
+
+  close() {
+    this.toggleClose.emit();
   }
 }

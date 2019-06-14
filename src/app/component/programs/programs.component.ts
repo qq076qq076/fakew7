@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, HostBinding, HostListener, EventEmitter, Output } from '@angular/core';
-import { ApplicationService, IApplication } from 'src/app/service/application/application.service';
+import { Component, OnInit, Input, HostBinding, EventEmitter, Output } from '@angular/core';
+import { ApplicationService } from 'src/app/service/application/application.service';
+import { Application } from 'src/app/service/application/application';
 
 @Component({
   selector: 'app-programs',
@@ -14,7 +15,7 @@ export class ProgramsComponent implements OnInit {
     this.open = open;
   }
 
-  appList: IApplication[] = [];
+  appList: Application[] = [];
 
   rightList = [
     {
@@ -37,7 +38,7 @@ export class ProgramsComponent implements OnInit {
   constructor(
     private appService: ApplicationService
   ) {
-    appService.getApplication().subscribe((appList: IApplication[]) => {
+    appService.getApplication().subscribe((appList: Application[]) => {
       this.appList = appList;
     });
   }

@@ -1,14 +1,21 @@
-import { Component, OnInit, Type, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { Computer, FolderMap, Folder } from './folder';
+import { Windows } from 'src/app/component/windows/windows.component';
 
 @Component({
   selector: 'app-folder',
   templateUrl: './folder.component.html',
   styleUrls: ['./folder.component.scss']
 })
-export class FolderComponent implements OnInit {
+export class FolderComponent implements OnInit, Windows {
+  static appName = 'folder';
 
-  constructor() { }
+  constructor(
+  ) { }
+  @Input() isMin = false;
+  @Output() setMin = new EventEmitter<boolean>();
+  @Output() setClose = new EventEmitter();
+  isMax = false;
   focusePath = false;
   readonly emptyFolder: Folder = {
     path: '',
@@ -78,5 +85,17 @@ export class FolderComponent implements OnInit {
     if (this.focusePath) {
       this.focusePath = false;
     }
+  }
+
+  toggleMax() {
+    this.isMax = !this.isMax;
+  }
+
+  toggleMin(isMin?: boolean) {
+    this.setMin.emit(isMin);
+  }
+
+  toggleClose() {
+    this.setClose.emit();
   }
 }
