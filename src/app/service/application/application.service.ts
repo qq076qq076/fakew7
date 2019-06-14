@@ -16,18 +16,18 @@ export class ApplicationService {
     return this.applicationSubject;
   }
 
-  clickApp(app: Application) {
+  clickApp(app: Application, setTop?: boolean) {
     // 檢查是否已經開啟
     const index = this.applicationList.findIndex((appIteem: Application) => appIteem.component === app.component);
     if (index !== -1) {
-      if (index === 0 && !this.applicationList[index].isHidden) {
-        // 是在最上層  最小化
-        this.applicationList.splice(index, 1);
-        app.isHidden = true;
-      } else if (this.applicationList[index].isHidden) {
+      if (this.applicationList[index].isHidden || setTop) {
         // 是最小化  打開
         this.applicationList.splice(index, 1);
         app.isHidden = false;
+      } else if (index === 0) {
+        // 是在最上層  最小化
+        this.applicationList.splice(index, 1);
+        app.isHidden = true;
       }
     }
     this.applicationList.unshift(app);

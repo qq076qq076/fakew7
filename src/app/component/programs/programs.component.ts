@@ -15,7 +15,9 @@ export class ProgramsComponent implements OnInit {
     this.open = open;
   }
 
-  appList: Application[] = [];
+  appList: Application[] = [
+    Application.Folder,
+  ];
 
   rightList = [
     {
@@ -38,9 +40,6 @@ export class ProgramsComponent implements OnInit {
   constructor(
     private appService: ApplicationService
   ) {
-    appService.getApplication().subscribe((appList: Application[]) => {
-      this.appList = appList;
-    });
   }
 
   ngOnInit() {
@@ -50,4 +49,8 @@ export class ProgramsComponent implements OnInit {
     this.toggleProgrames.emit();
   }
 
+  openApp(app: Application) {
+    this.appService.clickApp(app, true);
+    this.toggleProgrames.emit();
+  }
 }

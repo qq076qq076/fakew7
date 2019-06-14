@@ -8,7 +8,7 @@ import { Windows } from 'src/app/component/windows/windows.component';
   styleUrls: ['./folder.component.scss']
 })
 export class FolderComponent implements OnInit, Windows {
-  static appName = 'folder';
+  static appName = '檔案總攬';
 
   constructor(
   ) { }

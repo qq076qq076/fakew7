@@ -2,9 +2,10 @@
      (click)="close()"></div>
 <div class="programs-list">
   <ul>
-    <li *ngFor="let item of appList">
+    <li *ngFor="let item of appList"
+    (click)="openApp(item)">
       <img [src]="item.img">
-      <p class="name"> {{item.name}}</p>
+      <p class="name"> {{item.component.appName}}</p>
     </li>
   </ul>
 </div>

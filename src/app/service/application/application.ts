@@ -13,16 +13,4 @@ export class Application {
     public component?: Windows | any,
     public isHidden = false,
   ) { }
-
-  static List = [
-    Application.Folder,
-    Application.IE,
-    Application.Player,
-    Application.Chrome,
-    Application.Line,
-  ];
-
-  static getByName(name: string) {
-    return Application.List.find((app: Application) => app.component.appName === name);
-  }
 }
