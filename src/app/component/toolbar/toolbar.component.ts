@@ -9,13 +9,14 @@ import { Application } from 'src/app/service/application/application';
 })
 export class ToolbarComponent implements OnInit {
 
-  appList: Application[] = [
+  readonly defaultList: Application[] = [
     Application.Folder,
     Application.IE,
     Application.Player,
     Application.Chrome,
     Application.Line,
   ];
+  appList: Application[] = this.defaultList;
   proccess: Application[] = [];
   openPrograms = false;
 
@@ -23,6 +24,9 @@ export class ToolbarComponent implements OnInit {
     private appService: ApplicationService
   ) {
     appService.getApplication().subscribe((proccessList: Application[]) => {
+      // 複製陣列 直接等號會有指向的修改問題
+      this.appList = this.defaultList.concat();
+      this.proccess = proccessList;
       proccessList.forEach((proccess: Application) => {
         // 在proccess中的不是預設顯示項目  要加到工具列
         const has = this.appList.find((app: Application) => app === proccess);
@@ -30,8 +34,6 @@ export class ToolbarComponent implements OnInit {
           this.appList.push(proccess);
         }
       });
-      this.proccess = proccessList;
-
     });
   }
 
