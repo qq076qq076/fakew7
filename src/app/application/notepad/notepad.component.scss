@@ -1,0 +1,33 @@
+.toolbar {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to bottom, #F8FAFC, #D6DBEE 80%, #E4E7EE);
+    border-bottom: 1px solid #668090;
+    display: flex;
+
+    .button {
+        font-size: 13px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+
+        &:hover {
+            border: 1px solid #8A8F9E;
+            border-radius: 2px;
+        }
+    }
+}
+
+.text {
+    flex: 1;
+    overflow: auto;
+
+    textarea {
+        min-width: 100%;
+        min-height: 100%;
+    }
+}

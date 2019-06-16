@@ -3,7 +3,8 @@
              [ngClass]="{'maxSize': isMax,'hide':isMin}"
              (toggleMax)="toggleMax()"
              (toggleMin)="toggleMin(false)"
-             (toggleClose)="toggleClose()">
+             (toggleClose)="toggleClose()"
+             [appInject]="this">
   <div class="url-bar">
     <app-arrow (click)="toLast()"></app-arrow>
     <app-arrow class="next"></app-arrow>

@@ -9,9 +9,12 @@ import { Windows } from 'src/app/component/windows/windows.component';
 })
 export class FolderComponent implements OnInit, Windows {
   static appName = '檔案總攬';
-
+  static appImg = 'assets/images/folder-icon.png';
+  myName = FolderComponent.appName;
+  myImg = FolderComponent.appImg;
   constructor(
   ) { }
+  @Input() zIndex: number;
   @Input() isMin = false;
   @Output() setMin = new EventEmitter<boolean>();
   @Output() setClose = new EventEmitter();

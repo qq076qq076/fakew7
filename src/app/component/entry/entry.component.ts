@@ -23,6 +23,7 @@ export class EntryComponent implements OnInit, OnDestroy, OnChanges {
   @ViewChild('appHost', { read: ViewContainerRef }) appHost: ViewContainerRef;
   @Input() app: Application;
   @Input() isHidden: boolean;
+  @Input() zIndex: number;
 
   componentRef: ComponentRef<Windows>;
   constructor(
@@ -37,6 +38,7 @@ export class EntryComponent implements OnInit, OnDestroy, OnChanges {
     this.appHost.clear();
     this.componentRef = this.viewContainerRef.createComponent(componentFactory);
     const comInstance = this.componentRef.instance;
+    comInstance.zIndex = this.zIndex;
     comInstance.setMin.subscribe((isHidden: boolean) => {
       this.proccessService.setHidden(component, !isHidden);
     });
@@ -52,8 +54,14 @@ export class EntryComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.componentRef && changes.isHidden) {
-      this.componentRef.instance.isMin = changes.isHidden.currentValue;
+    if (this.componentRef) {
+      const comInstance = this.componentRef.instance;
+      if (changes.isHidden) {
+        comInstance.isMin = changes.isHidden.currentValue;
+      }
+      if (changes.zIndex) {
+        comInstance.zIndex = this.zIndex;
+      }
     }
   }
 }

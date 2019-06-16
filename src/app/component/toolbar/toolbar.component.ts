@@ -11,10 +11,10 @@ export class ToolbarComponent implements OnInit {
 
   readonly defaultList: Application[] = [
     Application.Folder,
-    Application.IE,
-    Application.Player,
-    Application.Chrome,
-    Application.Line,
+    // Application.IE,
+    // Application.Player,
+    // Application.Chrome,
+    // Application.Line,
   ];
   appList: Application[] = this.defaultList;
   proccess: Application[] = [];

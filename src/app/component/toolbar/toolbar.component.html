@@ -9,7 +9,7 @@
        *ngFor="let item of appList"
        (click)="toggleApp(item)"
        [ngClass]="{'open': isOpen(item)}">
-    <img [src]="item.img" />
+    <img [src]="item.component.appImg" />
   </div>
 </div>
 <div class="date-time">

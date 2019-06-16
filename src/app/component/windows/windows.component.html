@@ -5,8 +5,8 @@
     <div class="drag"
          (mousedown)="startDrag($event)"
          (dblclick)="large()">
-      <img [src]="logo">
-      {{name}}
+      <img [src]="appInject.myImg">
+      {{appInject.myName}}
     </div>
     <div class="btn btn_small"
          [ngClass]="{'focuse': isFocuse}"

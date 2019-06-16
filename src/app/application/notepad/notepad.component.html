@@ -1,3 +1,18 @@
-<p>
-  notepad works!
-</p>
+<app-windows minWidth="400"
+             minHeight="500"
+             [ngClass]="{'maxSize': isMax,'hide':isMin}"
+             (toggleMax)="toggleMax()"
+             (toggleMin)="toggleMin(false)"
+             (toggleClose)="toggleClose()"
+             [appInject]="this">
+  <div class="toolbar">
+    <span class="button"> 檔案(F) </span>
+    <span class="button"> 編輯(E) </span>
+    <span class="button"> 格式(O) </span>
+    <span class="button"> 檢視(V) </span>
+    <span class="button"> 說明(H) </span>
+  </div>
+  <div class="text">
+    <textarea></textarea>
+  </div>
+</app-windows>

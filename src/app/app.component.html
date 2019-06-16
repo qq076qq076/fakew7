@@ -10,9 +10,9 @@
 <ng-template #elseTemplate>
   <div class="container">
     <div class="desktop">
-      <ng-container *ngFor="let item of proccessList">
+      <ng-container *ngFor="let item of proccessList;let i = index">
         <ng-container *ngIf="item.component">
-          <app-entry [app]="item" [isHidden]="item.isHidden"></app-entry>
+          <app-entry [app]="item" [isHidden]="item.isHidden" [zIndex]="i"></app-entry>
         </ng-container>
       </ng-container>
     </div>

@@ -4,8 +4,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 export class Windows {
   static appName: string;
+  static appImg: string;
+  myName: string;
+  myImg: string;
   isMin: boolean;
   isMax: boolean;
+  zIndex: number;
   setMin: EventEmitter<boolean>;
   setClose: EventEmitter<{}>;
   toggleMax: () => void;
@@ -24,8 +28,7 @@ export class WindowsComponent implements OnInit {
     private sanitizer: DomSanitizer,
   ) { }
 
-  @Input() name = '';
-  @Input() logo = '';
+  @Input() appInject;
   @Input()
   set minWidth(value: string | number) {
     const num = (typeof value === 'string') ? parseInt(value, 10) : value;
@@ -72,6 +75,7 @@ export class WindowsComponent implements OnInit {
       height: ${height};
       left: ${left};
       width: ${width};
+      z-index: ${300 - this.appInject.zIndex};
     `);
   }
 

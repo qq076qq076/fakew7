@@ -4,7 +4,7 @@
   <ul>
     <li *ngFor="let item of appList"
     (click)="openApp(item)">
-      <img [src]="item.img">
+      <img [src]="item.component.appImg">
       <p class="name"> {{item.component.appName}}</p>
     </li>
   </ul>

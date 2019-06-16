@@ -18,7 +18,7 @@ export class ApplicationService {
 
   clickApp(app: Application, setTop?: boolean) {
     // 檢查是否已經開啟
-    const index = this.applicationList.findIndex((appIteem: Application) => appIteem.component === app.component);
+    const index = this.applicationList.findIndex((appIteem: Application) => appIteem.component.appName === app.component.appName);
     if (index !== -1) {
       if (this.applicationList[index].isHidden || setTop) {
         // 是最小化  打開
@@ -28,6 +28,9 @@ export class ApplicationService {
         // 是在最上層  最小化
         this.applicationList.splice(index, 1);
         app.isHidden = true;
+      } else {
+        // 打開但不在最上層 移動到最上層
+        this.applicationList.splice(index, 1);
       }
     }
     this.applicationList.unshift(app);
@@ -35,13 +38,13 @@ export class ApplicationService {
   }
 
   closeApp(component) {
-    const index = this.applicationList.findIndex((appIteem: Application) => appIteem.component === component);
+    const index = this.applicationList.findIndex((appIteem: Application) => appIteem.component.appName === component.appName);
     this.applicationList.splice(index, 1);
     this.applicationSubject.next(this.applicationList);
   }
 
   setHidden(component, isHidden: boolean) {
-    const comp = this.applicationList.find((appIteem: Application) => appIteem.component === component);
+    const comp = this.applicationList.find((appIteem: Application) => appIteem.component.appName === component.appName);
     comp.isHidden = isHidden;
     this.applicationSubject.next(this.applicationList);
   }

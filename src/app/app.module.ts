@@ -29,6 +29,7 @@ import { EntryComponent } from './component/entry/entry.component';
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
+    NotepadComponent,
     FolderComponent,
   ]
 })

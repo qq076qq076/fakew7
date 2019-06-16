@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.starting = false;
+      this.starting = true;
     }, 4800);
 
     this.applicationService.getApplication()

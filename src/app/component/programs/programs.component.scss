@@ -15,6 +15,7 @@
         #434D57 70%,
         rgb(165, 190, 219));
     user-select: none;
+    z-index: 500;
 
     &.open {
         display: flex;
