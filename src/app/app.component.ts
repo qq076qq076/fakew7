@@ -9,7 +9,7 @@ import { Application } from './service/application/application';
 })
 export class AppComponent implements OnInit {
   title = 'start';
-  starting = false;
+  starting = true;
   proccessList: Application[];
 
   constructor(
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.starting = true;
+      this.starting = false;
     }, 4800);
 
     this.applicationService.getApplication()
