@@ -9,7 +9,7 @@ import { Application } from './service/application/application';
 })
 export class AppComponent implements OnInit {
   title = 'start';
-  starting = true;
+  starting = false;
   proccessList: Application[];
 
   constructor(

@@ -10,6 +10,8 @@ import { FolderComponent } from './application/folder/folder.component';
 import { ArrowComponent } from './component/arrow/arrow.component';
 import { NotepadComponent } from './application/notepad/notepad.component';
 import { EntryComponent } from './component/entry/entry.component';
+import { LineComponent } from './application/line/line.component';
+import { DraggableDirective } from './directive/draggable/draggable.directive';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { EntryComponent } from './component/entry/entry.component';
     ArrowComponent,
     NotepadComponent,
     EntryComponent,
+    LineComponent,
+    DraggableDirective,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,7 @@ import { EntryComponent } from './component/entry/entry.component';
   entryComponents: [
     NotepadComponent,
     FolderComponent,
+    LineComponent,
   ]
 })
 export class AppModule { }

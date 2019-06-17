@@ -18,6 +18,7 @@ export class ProgramsComponent implements OnInit {
   appList: Application[] = [
     Application.Folder,
     Application.NotePad,
+    Application.Line,
   ];
 
   rightList = [
