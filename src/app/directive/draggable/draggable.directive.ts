@@ -6,8 +6,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class DraggableDirective implements OnInit, AfterViewInit {
   constructor(
-    private elementRef: ElementRef,
-    private sanitizer: DomSanitizer,
+    public elementRef: ElementRef,
+    public sanitizer: DomSanitizer,
   ) { }
   @ViewChild('drag', { read: ElementRef }) dragRef: ElementRef;
   @Input()

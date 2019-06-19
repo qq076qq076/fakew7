@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, HostBinding } from '@angular/core';
 import { Windows } from 'src/app/component/windows/windows.component';
 import { DraggableDirective } from 'src/app/directive/draggable/draggable.directive';
 
@@ -10,15 +10,21 @@ import { DraggableDirective } from 'src/app/directive/draggable/draggable.direct
 export class LineComponent extends DraggableDirective implements OnInit, Windows {
   static appName = 'Line';
   static appImg = 'assets/images/line-icon.png';
-  myName = LineComponent.appName;
-  myImg = LineComponent.appImg;
-  isMax = false;
   @Input() zIndex: number;
   @Input() isMin = false;
   @Output() setMin = new EventEmitter<boolean>();
   @Output() setClose = new EventEmitter<{}>();
+  myName = LineComponent.appName;
+  myImg = LineComponent.appImg;
+  isMax = false;
   minWidth = 300;
   minHeight = 453;
+  tab = 0;
+  error: string;
+  @HostBinding('class') get classes() {
+    return this.isMin ? 'hide' : '';
+  }
+
   ngOnInit() {
   }
 
@@ -34,4 +40,7 @@ export class LineComponent extends DraggableDirective implements OnInit, Windows
     this.setClose.emit();
   }
 
+  login() {
+    this.error = '因網路問題導致登入失敗，請先確認網路狀態後，在式一次。';
+  }
 }

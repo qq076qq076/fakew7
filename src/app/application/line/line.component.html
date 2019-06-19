@@ -1,3 +1,50 @@
-<div class="tool">
-  <div></div>
+<div class="wrap">
+  <div class="tool">
+    <div class="setting"></div>
+    <div class="f1"></div>
+    <div class="setHide"
+         (click)="toggleMin(false)"></div>
+    <div class="setClose"
+         (click)="toggleClose()"></div>
+  </div>
+  <img src="assets/images/line-font-logo.png"
+       class="logo" />
+  <div class="login-input wi">
+    <div class="tab">
+      <div class="tab-option"
+           [ngClass]="{'active': tab===0}"
+           (class)="tab=0">電子郵件登入</div>
+      <div class="tab-option"
+           [ngClass]="{'active': tab===1}"
+           (class)="tab=1">使用行動條碼登入</div>
+    </div>
+    <div class="content"
+         *ngIf="tab===0">
+      <input type="text"
+             placeholder="電子郵件帳號" />
+      <input type="password"
+             placeholder="密碼" />
+      <button class="login" (click)="login()">登入</button>
+      <p class="cellphone">使用電話號碼登入&nbsp;></p>
+      <div class="check">
+        <input type="checkbox"
+               id="autoLogin" />
+        <label for="autoLogin">自動登入</label>
+      </div>
+      <div class="check">
+        <input type="checkbox"
+               id="autoLogin" />
+        <label for="autoLogin">於Windows開機時自動啟動</label>
+      </div>
+      <p class="error"
+         *ngIf="error">{{error}}
+      </p>
+    </div>
+    <button class="regist">註冊新帳號</button>
+  </div>
+  <div class="reset">
+    <img class="lock"
+         src="assets/images/line-lock-icon.png">
+    重設密碼
+  </div>
 </div>
