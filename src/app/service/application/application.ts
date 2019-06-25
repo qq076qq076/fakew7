@@ -15,5 +15,6 @@ export class Application {
   constructor(
     public component?: Windows | any,
     public isHidden = false,
+    public zIndex = 0,
   ) { }
 }

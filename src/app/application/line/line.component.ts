@@ -18,12 +18,16 @@ export class LineComponent extends DraggableDirective implements OnInit, Windows
   myImg = LineComponent.appImg;
   isMax = false;
   minWidth = 300;
-  minHeight = 453;
+  minHeight = 465;
   tab = 0;
   error: string;
   @HostBinding('class') get classes() {
     return this.isMin ? 'hide' : '';
   }
+
+  // @HostBinding('style.zIndex') get styles() {
+  //   return 300 + this.zIndex;
+  // }
 
   ngOnInit() {
   }

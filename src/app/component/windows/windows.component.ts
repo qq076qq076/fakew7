@@ -75,7 +75,7 @@ export class WindowsComponent implements OnInit {
       height: ${height};
       left: ${left};
       width: ${width};
-      z-index: ${300 - this.appInject.zIndex};
+      z-index: ${300 + this.appInject.zIndex};
     `);
   }
 
