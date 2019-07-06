@@ -6,11 +6,65 @@
              (toggleClose)="toggleClose()"
              [appInject]="this">
   <div class="toolbar">
-    <span class="button"> 檔案(F) </span>
-    <span class="button"> 編輯(E) </span>
-    <span class="button"> 格式(O) </span>
-    <span class="button"> 檢視(V) </span>
-    <span class="button"> 說明(H) </span>
+    <div class="button">
+      檔案(F)
+      <ul class="option">
+        <li>
+          <span class="f1">開新檔案(N)</span> <span>Ctrl+N</span>
+        </li>
+        <li>
+          <span class="f1">開啟舊檔(O)</span> <span>Ctrl+O</span>
+        </li>
+        <li>
+          <span class="f1">儲存檔案(S)</span> <span>Ctrl+S</span>
+        </li>
+        <li>
+          <span class="f1">另存心檔(A)</span> <span></span>
+        </li>
+        <li class="top-line">
+          <span class="f1">版面設定(U)</span> <span></span>
+        </li>
+        <li>
+          <span class="f1">列印(P)</span> <span>Ctrl+P</span>
+        </li>
+        <li class="top-line">
+          <span class="f1">結束(X)</span> <span></span>
+        </li>
+      </ul>
+    </div>
+    <div class="button">
+      編輯(E)
+      <ul class="option">
+        <li>
+          <span></span>
+          <span></span>
+        </li>
+      </ul>
+    </div>
+    <div class="button">
+      格式(O)
+      <ul class="option">
+        <li>
+          <span></span><span></span>
+        </li>
+      </ul>
+    </div>
+    <div class="button">
+      檢視(V)
+      <ul class="option">
+        <li>
+          <span></span><span></span>
+        </li>
+      </ul>
+    </div>
+    <div class="button">
+      說明(H)
+      <ul class="option">
+        <li>
+          <span></span><span></span>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="text">
     <textarea></textarea>

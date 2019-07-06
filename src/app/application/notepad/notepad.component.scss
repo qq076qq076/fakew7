@@ -14,10 +14,51 @@
         padding: 0 5px;
         box-sizing: border-box;
         border: 1px solid transparent;
+        position: relative;
 
         &:hover {
             border: 1px solid #8A8F9E;
             border-radius: 2px;
+
+            .option {
+                display: flex;
+            }
+        }
+
+        .option {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            left: 0;
+            position: absolute;
+            display: none;
+            top: 100%;
+            background: #f1f1f1;
+            width: max-content;
+            padding-left: 25px;
+            flex-direction: column;
+            box-shadow: 1px 2px 3px black;
+
+            li {
+                display: flex;
+                border-left: 1px solid #ffffff;
+                height: 22px;
+                padding: 0 10px 0 5px;
+
+                >span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+
+                .f1 {
+                    flex: 1;
+                }
+
+                &.top-line {
+                    border-top: 1px solid #ffffff;
+                }
+            }
         }
     }
 }
