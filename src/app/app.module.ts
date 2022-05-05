@@ -31,11 +31,6 @@ import { DraggableDirective } from './directive/draggable/draggable.directive';
     FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    NotepadComponent,
-    FolderComponent,
-    LineComponent,
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

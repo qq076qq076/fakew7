@@ -9,7 +9,7 @@ export class DraggableDirective implements OnInit, AfterViewInit {
     public elementRef: ElementRef,
     public sanitizer: DomSanitizer,
   ) { }
-  @ViewChild('drag', { read: ElementRef, static: false }) dragRef: ElementRef;
+  @ViewChild('drag', { read: ElementRef }) dragRef: ElementRef;
   @Input()
   set minWidth(value: string | number) {
     const num = (typeof value === 'string') ? parseInt(value, 10) : value;
