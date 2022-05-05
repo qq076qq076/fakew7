@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostListener, HostBinding, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DragDirection } from 'src/app/type/drag-direction/drag-direction';
-import { DomSanitizer } from '@angular/platform-browser';
 
 export class Windows {
   static appName: string;
@@ -25,7 +24,6 @@ export class Windows {
 export class WindowsComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
-    private sanitizer: DomSanitizer,
   ) { }
 
   @Input() appInject;
@@ -69,14 +67,14 @@ export class WindowsComponent implements OnInit {
     const height = this.myHeight ? this.myHeight + 'px' : 'auto';
     const left = this.myLeft ? this.myLeft + 'px' : 'auto';
     const width = this.myWidth ? this.myWidth + 'px' : 'auto';
-    return this.sanitizer.bypassSecurityTrustStyle(`
+    return `
       cursor: ${cursor};
       top: ${top};
       height: ${height};
       left: ${left};
       width: ${width};
       z-index: ${300 + this.appInject.zIndex};
-    `);
+    `;
   }
 
   @HostListener('mousemove', ['$event']) onmouseover(e: MouseEvent) {

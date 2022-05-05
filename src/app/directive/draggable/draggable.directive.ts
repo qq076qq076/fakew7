@@ -90,6 +90,8 @@ export class DraggableDirective implements OnInit, AfterViewInit {
     const maxRight = this.elementRef.nativeElement.closest('div.desktop').offsetWidth;
     const canSetLeft = this.myLeft + left > 0 && this.myLeft + left + this.myWidth < maxRight;
     const canSetWidth = this.myWidth + width >= this._minWidth && this.myWidth + this.myLeft + width < maxRight;
+    console.log('canSetLeft:',canSetLeft);
+    console.log('canSetWidth:',canSetWidth);
     if (canSetLeft && canSetWidth) {
       this.myLeft += left;
       this.myWidth += width;

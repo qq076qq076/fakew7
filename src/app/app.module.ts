@@ -12,6 +12,7 @@ import { NotepadComponent } from './application/notepad/notepad.component';
 import { EntryComponent } from './component/entry/entry.component';
 import { LineComponent } from './application/line/line.component';
 import { DraggableDirective } from './directive/draggable/draggable.directive';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DraggableDirective } from './directive/draggable/draggable.directive';
   imports: [
     BrowserModule,
     FormsModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

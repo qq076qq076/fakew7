@@ -17,8 +17,8 @@ export class LineComponent extends DraggableDirective implements OnInit, Windows
   myName = LineComponent.appName;
   myImg = LineComponent.appImg;
   isMax = false;
-  minWidth = 300;
-  minHeight = 465;
+  _minWidth = 300;
+  _minHeight = 465;
   tab = 0;
   error: string;
   @HostBinding('class') get classes() {
