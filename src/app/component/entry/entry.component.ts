@@ -20,7 +20,7 @@ import { ApplicationService } from 'src/app/service/application/application.serv
   styleUrls: ['./entry.component.scss']
 })
 export class EntryComponent implements OnInit, OnDestroy, OnChanges {
-  @ViewChild('appHost', { read: ViewContainerRef }) appHost: ViewContainerRef;
+  @ViewChild('appHost', { read: ViewContainerRef, static: true }) appHost: ViewContainerRef;
   @Input() app: Application;
   @Input() isHidden: boolean;
   @Input() zIndex: number;
